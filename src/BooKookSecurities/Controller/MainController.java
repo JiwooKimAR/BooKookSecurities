@@ -4,12 +4,18 @@ import BooKookSecurities.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,9 +37,17 @@ public class MainController implements Initializable {
 
     }
 
-    public void OnFindReportClicked(){
+    public void OnFindReportClicked() throws Exception{
         //read report file and load to table view
         System.out.println("Find Report Button clicked");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/report.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initStyle(StageS);
+        stage.setTitle("Reports");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void OnCalculateClicked(){
