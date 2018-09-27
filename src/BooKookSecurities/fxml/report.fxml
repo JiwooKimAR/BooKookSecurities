@@ -18,7 +18,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="table_report" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
@@ -27,14 +27,14 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label id="label_itemSelected" text="0개가 선택됨." />
+                  <Label id="label_itemSelected" fx:id="label_itemSelected" text="0개가 선택됨." />
                </children>
             </HBox>
             <HBox spacing="10.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" prefWidth="100.0" text="닫기" />
-                  <Button mnemonicParsing="false" prefWidth="100.0" text="삭제" />
+                  <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#OnCancelClicked" prefWidth="100.0" text="닫기" />
+                  <Button mnemonicParsing="false" onAction="#OnDeleteClicked" prefWidth="100.0" text="삭제" />
                </children>
             </HBox>
          </children>
