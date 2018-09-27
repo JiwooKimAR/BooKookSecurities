@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
@@ -17,17 +15,15 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private Label label_filelocation; //실행탭 파일위치
+    private Label label_filelocation, label_lastchecked; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
     @FXML
-    private Label label_lastchecked; //실행탭 마지막으로 확인된 보고서
+    private DatePicker txt_endDate, txt_startDate;
     @FXML
-    private TextField txt_excelLocation;
+    private TextField txt_targetValue, txt_excelLocation, txt_email, txt_reportFile;
     @FXML
-    private DatePicker txt_endDate;
+    private ToggleButton toggle_startprogram;
     @FXML
-    private DatePicker txt_startDate;
-    @FXML
-    private TextField txt_targetValue;
+    private ComboBox<String> combo_alarmtype, combo_year, combo_month, combo_day;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,7 +32,7 @@ public class MainController implements Initializable {
     }
 
     public void OnFindReportClicked(){
-        //read report file and load to tableview
+        //read report file and load to table view
         System.out.println("Find Report Button clicked");
     }
 
@@ -59,6 +55,16 @@ public class MainController implements Initializable {
     }
 
 
+    public void OnSetEmailClicked(){
+        System.out.println("email clicked");
+    }
 
+    public void OnLocateReportClicked(){
+        System.out.println("locate report clicked");
+    }
+
+    public void OnUpdateClicked(){
+        System.out.println("update clicked");
+    }
 
 }

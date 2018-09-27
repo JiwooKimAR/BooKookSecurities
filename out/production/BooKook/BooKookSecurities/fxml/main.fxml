@@ -98,7 +98,7 @@
                                           <Insets top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField id="txt_email" HBox.hgrow="ALWAYS" />
+                                    <TextField id="txt_email" fx:id="txt_email" HBox.hgrow="ALWAYS" />
                                     <Button id="btn_setEmail" mnemonicParsing="false" text="확인" />
                                  </children>
                               </HBox>
@@ -114,7 +114,7 @@
                                           <Insets right="2.0" />
                                        </padding>
                                     </Region>
-                                    <TextField id="txt_reportFileLocation" HBox.hgrow="ALWAYS" />
+                                    <TextField id="txt_reportFileLocation" fx:id="txt_reportFile" HBox.hgrow="ALWAYS" />
                                     <Region>
                                        <padding>
                                           <Insets left="1.0" />
@@ -130,14 +130,14 @@
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ToggleButton id="toggle_startprogram" mnemonicParsing="false" prefHeight="23.0" prefWidth="125.0" text="On" />
+                                    <ToggleButton id="toggle_startprogram" fx:id="toggle_startprogram" mnemonicParsing="false" prefHeight="23.0" prefWidth="125.0" text="On" />
                                     <Region HBox.hgrow="ALWAYS" />
                                     <Label id="label_alarmtype" text="알림 시간">
                                        <padding>
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox id="combo_alarmtype" prefHeight="23.0" prefWidth="170.0" HBox.hgrow="ALWAYS" />
+                                    <ComboBox id="combo_alarmtype" fx:id="combo_alarmtype" prefHeight="23.0" prefWidth="170.0" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">

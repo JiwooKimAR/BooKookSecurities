@@ -98,8 +98,8 @@
                                           <Insets top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField id="txt_email" HBox.hgrow="ALWAYS" />
-                                    <Button id="btn_setEmail" mnemonicParsing="false" text="확인" />
+                                    <TextField id="txt_email" fx:id="txt_email" HBox.hgrow="ALWAYS" />
+                                    <Button id="btn_setEmail" mnemonicParsing="false" onAction="#OnSetEmailClicked" text="확인" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
@@ -114,13 +114,13 @@
                                           <Insets right="2.0" />
                                        </padding>
                                     </Region>
-                                    <TextField id="txt_reportFileLocation" HBox.hgrow="ALWAYS" />
+                                    <TextField id="txt_reportFileLocation" fx:id="txt_reportFile" HBox.hgrow="ALWAYS" />
                                     <Region>
                                        <padding>
                                           <Insets left="1.0" />
                                        </padding>
                                     </Region>
-                                    <Button id="btn_locateReport" mnemonicParsing="false" text="..." />
+                                    <Button id="btn_locateReport" mnemonicParsing="false" onAction="#OnLocateReportClicked" text="..." />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
@@ -130,14 +130,14 @@
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ToggleButton id="toggle_startprogram" mnemonicParsing="false" prefHeight="23.0" prefWidth="125.0" text="On" />
+                                    <ToggleButton id="toggle_startprogram" fx:id="toggle_startprogram" mnemonicParsing="false" prefHeight="23.0" prefWidth="125.0" text="On" />
                                     <Region HBox.hgrow="ALWAYS" />
                                     <Label id="label_alarmtype" text="알림 시간">
                                        <padding>
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox id="combo_alarmtype" prefHeight="23.0" prefWidth="170.0" HBox.hgrow="ALWAYS" />
+                                    <ComboBox id="combo_alarmtype" fx:id="combo_alarmtype" prefHeight="23.0" prefWidth="170.0" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
@@ -147,9 +147,9 @@
                                           <Insets top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <ComboBox id="combo_year" prefHeight="23.0" prefWidth="115.0" promptText="년" />
-                                    <ComboBox id="combo_month" prefHeight="23.0" prefWidth="115.0" promptText="월" />
-                                    <ComboBox id="combo_day" prefHeight="23.0" prefWidth="115.0" promptText="일" />
+                                    <ComboBox id="combo_year" fx:id="combo_year" prefHeight="23.0" prefWidth="115.0" promptText="년" />
+                                    <ComboBox id="combo_month" fx:id="combo_month" prefHeight="23.0" prefWidth="115.0" promptText="월" />
+                                    <ComboBox id="combo_day" fx:id="combo_day" prefHeight="23.0" prefWidth="115.0" promptText="일" />
                                     <Region HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
@@ -157,7 +157,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                    <Button id="btn_modify" mnemonicParsing="false" prefHeight="23.0" prefWidth="168.0" text="변경" />
+                                    <Button id="btn_modify" mnemonicParsing="false" onAction="#OnUpdateClicked" prefHeight="23.0" prefWidth="168.0" text="변경" />
                                  </children>
                               </HBox>
                            </children>
