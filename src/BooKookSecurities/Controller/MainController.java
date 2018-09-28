@@ -1,6 +1,8 @@
 package BooKookSecurities.Controller;
 
 import BooKookSecurities.Main;
+import BooKookSecurities.String.Strings;
+import BooKookSecurities.Util.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,6 +60,10 @@ public class MainController implements Initializable {
         System.out.println(txt_startDate.getEditor().getText());
         System.out.println(txt_endDate.getEditor().getText());
         System.out.println(txt_targetValue.getText());
+
+        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
+        sender.SendMail("yo", 10);
+
     }
 
     public void OnChooseExcelClicked(){
