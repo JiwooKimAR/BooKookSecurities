@@ -17,15 +17,16 @@ public class EmailSender {
     private Properties prop = new Properties();
 
     public EmailSender(String recipient) {
-        this.recipient = recipient;
-    }
-
-    public void SendMail(String CompanyName, int passedDays){
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", 465);
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.ssl.enable", "true");
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        this.recipient = recipient;
+    }
+
+    public void SendMail(String CompanyName, int passedDays){
+
         Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(senderEmail, senderEmailPW);
