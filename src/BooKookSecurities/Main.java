@@ -1,5 +1,7 @@
 package BooKookSecurities;
 
+import BooKookSecurities.Scheduler.NotifyScheduler;
+import BooKookSecurities.Scheduler.NotifyThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +20,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    public void init(){
+        NotifyScheduler notifyScheduler = new NotifyScheduler();
+        notifyScheduler.setScheduler(new NotifyThread(), 10);
+    }
     public static void main(String[] args) {
         launch(args);
     }

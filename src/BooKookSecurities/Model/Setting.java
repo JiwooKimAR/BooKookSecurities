@@ -3,7 +3,7 @@ package BooKookSecurities.Model;
 public class Setting {
     private String recipient_mail, report_path;
     private boolean isStartProgram;
-    private int alarm_hour, alarm_min, alarm_sec, time_period;
+    private int limit_year, limit_month, limit_sec, time_period;
 
     public Setting() {
     }
@@ -40,27 +40,27 @@ public class Setting {
         isStartProgram = startProgram;
     }
 
-    public int getAlarm_hour() {
-        return alarm_hour;
+    public int getLimit_year() {
+        return limit_year;
     }
 
-    public void setAlarm_hour(int alarm_hour) {
-        this.alarm_hour = alarm_hour;
+    public void setLimit_year(int limit_year) {
+        this.limit_year = limit_year;
     }
 
-    public int getAlarm_min() {
-        return alarm_min;
+    public int getLimit_month() {
+        return limit_month;
     }
 
-    public void setAlarm_min(int alarm_min) {
-        this.alarm_min = alarm_min;
+    public void setLimit_month(int limit_month) {
+        this.limit_month = limit_month;
     }
 
-    public int getAlarm_sec() {
-        return alarm_sec;
+    public int getLimit_sec() {
+        return limit_sec;
     }
 
-    public void setAlarm_sec(int alarm_sec) {
-        this.alarm_sec = alarm_sec;
+    public void setLimit_sec(int limit_sec) {
+        this.limit_sec = limit_sec;
     }
 }
