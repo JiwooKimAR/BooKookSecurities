@@ -19,7 +19,7 @@ Controller.class
 SettingsManager.class
 > 전역 변수 + 세팅에 관련된 정보 불러올 수 있음
 
-###해야할일
+### 해야할일
 
 이지현
 > TrayManager
