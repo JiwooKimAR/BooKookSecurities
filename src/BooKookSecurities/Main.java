@@ -18,8 +18,15 @@ public class Main extends Application {
         primaryStage.setScene(mainWindow);
 
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> {
+            //e.consume(); to not close the program
+            closeProgram();
+        });
     }
 
+    private void closeProgram(){
+        System.out.println("program is closed");
+    }
     public void init(){
         NotifyScheduler notifyScheduler = new NotifyScheduler();
         notifyScheduler.setScheduler(new NotifyThread(), 10);

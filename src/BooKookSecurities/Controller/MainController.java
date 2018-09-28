@@ -76,6 +76,7 @@ public class MainController implements Initializable {
     }
 
 
+
     public void OnSetEmailClicked(){
         System.out.println("email clicked");
     }
