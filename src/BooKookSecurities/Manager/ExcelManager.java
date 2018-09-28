@@ -1,5 +1,5 @@
 package BooKookSecurities.Manager;
 
 public class ExcelManager {
-    //manages excel
+    //manages read+write excel
 }

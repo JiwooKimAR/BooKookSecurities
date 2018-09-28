@@ -9,7 +9,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 
+/*
+    생성자로 받는 사람 주소를 보냄.
+    SendMail 메소드를 통해 회사이름 + 지난 일을 보내면 메일 발송.
 
+    발송실패했을때 오류처리 필요
+ */
 public class EmailSender {
     private final String senderEmail = Strings.EmailSenderMail;
     private final String senderEmailPW = Strings.EmailSenderPW;

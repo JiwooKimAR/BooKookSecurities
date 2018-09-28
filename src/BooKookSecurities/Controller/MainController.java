@@ -45,7 +45,7 @@ public class MainController implements Initializable {
         //read report file and load to table view
         System.out.println("Find Report Button clicked");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/report.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent   root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Reports");

@@ -5,6 +5,7 @@ import BooKookSecurities.String.Strings;
 /*
     전역변수로 존재
     프로그램에 관련된 옵션 저장+수정을 맡음
+    getInstance 호출로 인스턴스를 가져와서 사용
  */
 public class SettingsManager {
     private final String settingPath = Strings.SettingPath;
