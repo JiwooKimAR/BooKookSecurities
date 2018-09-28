@@ -2,45 +2,54 @@ package BooKookSecurities.Model;
 
 import javafx.scene.control.CheckBox;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Report {
-    int number;
-    String name;
-    Date date;
-    CheckBox isSelected;
-
+    private String item_code;
+    private String item_name;
+    private Calendar item_added_date;
+    private int date_difference;
+    private int sendCount;
+    private CheckBox isSelected;
     public Report() {
     }
 
-    public Report(int number, String name, Date date) {
-        this.number = number;
-        this.name = name;
-        this.date = date;
-        this.isSelected.setSelected(false);
+    public Report(String item_code, String item_name, Calendar item_added_date) {
+        this.item_code = item_code;
+        this.item_name = item_name;
+        this.item_added_date = item_added_date;
+        isSelected.setSelected(false);
     }
 
-    public int getNumber() {
-        return number;
+    public String getItemCode() {
+        return item_code;
     }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public String getItemName() {
+        return item_name;
     }
-
-    public String getName() {
-        return name;
+    public Calendar getItemAddedDate() {
+        return item_added_date;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public int getDateDifference() {
+        return date_difference;
     }
-
-    public Date getDate() {
-        return date;
+    public int getSendCount() {
+        return sendCount;
     }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setItemCode(String code) {
+        this.item_code = code;
+    }
+    public void setItemName(String name) {
+        this.item_name = name;
+    }
+    public void setItemAddedDate(Calendar date) {
+        this.item_added_date = date;
+    }
+    public void setDateDifference(int diff) {
+        this.date_difference = diff;
+    }
+    public void setSendCount(int newCount) {
+        this.sendCount = newCount;
     }
 }
