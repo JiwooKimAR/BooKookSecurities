@@ -54,15 +54,28 @@ public class MainController implements Initializable {
     }
 
     public void OnCalculateClicked(){
-        //read excel files in selected directory and create an excel file with results
-        System.out.println("Calculate disparate ratio");
-        System.out.println(txt_excelLocation.getText());
-        System.out.println(txt_startDate.getEditor().getText());
-        System.out.println(txt_endDate.getEditor().getText());
-        System.out.println(txt_targetValue.getText());
 
-        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
-        sender.SendMail("yo", 10);
+        if (txt_excelLocation.getText().isEmpty() || txt_startDate.getEditor().getText().isEmpty() || txt_endDate.getEditor().getText().isEmpty() ||
+            txt_targetValue.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("경고");
+            alert.setContentText("빈 칸을 채워주세요.");
+
+            alert.showAndWait();
+
+        }
+    else{
+            //calculate disparate ratio
+            //read excel files in selected directory and create an excel file with results
+//        System.out.println("Calculate disparate ratio");
+//        System.out.println(txt_excelLocation.getText());
+//        System.out.println(txt_startDate.getEditor().getText());
+//        System.out.println(txt_endDate.getEditor().getText());
+//        System.out.println(txt_targetValue.getText());
+
+//        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
+//        sender.SendMail("yo", 10);
+        }
 
     }
 
