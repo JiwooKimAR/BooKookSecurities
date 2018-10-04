@@ -1,6 +1,7 @@
 package BooKookSecurities.Controller;
 
 import BooKookSecurities.Main;
+import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
 import javafx.event.ActionEvent;
@@ -91,7 +92,9 @@ public class MainController implements Initializable {
 
 
     public void OnSetEmailClicked(){
-        System.out.println("email clicked");
+
+        SettingsManager settingsManager = SettingsManager.getInstance();
+        settingsManager.getSetting();
     }
 
     public void OnLocateReportClicked(){
