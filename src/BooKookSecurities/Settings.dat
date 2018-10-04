@@ -1,0 +1,7 @@
+recipient email="kuk941025@gmail.com"
+report path="data\report.txt"
+limit year=1
+limit month=0
+limit day=0
+start=No
+time period=6
