@@ -31,15 +31,20 @@ public class SettingsManager {
     }
 
     public Setting getSetting(){
-        
+
         if (setting == null) {
             setting = new Setting();
             setSetting();
         }
-
         return this.setting;
     }
 
+    private void updateSetting(String key, String value){
+        String[] updates = new String[2];
+        updates[0] = key;
+        updates[1] = value;
+        readToken(updates);
+    }
     private void setSetting(){
         //load data to setting
         List<String> settingLines;

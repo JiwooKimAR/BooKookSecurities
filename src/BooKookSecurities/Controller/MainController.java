@@ -2,6 +2,7 @@ package BooKookSecurities.Controller;
 
 import BooKookSecurities.Main;
 import BooKookSecurities.Manager.SettingsManager;
+import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
 import javafx.event.ActionEvent;
@@ -34,12 +35,30 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> combo_alarmtype, combo_year, combo_month, combo_day;
 
+    private SettingsManager settingsManager;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(label_filelocation.getText());
         combo_year.getItems().addAll("1", "2");
         for (int i = 1; i <= 12; i++) combo_month.getItems().add(Integer.toString(i));
         for (int i = 1; i <= 30; i++) combo_day.getItems().add(Integer.toString(i));
+
+
+        loadSettings();
+    }
+    private void loadSettings(){
+        settingsManager = SettingsManager.getInstance();
+        Setting setting = settingsManager.getSetting();
+
+        txt_email.setText(setting.getRecipient_mail());
+        txt_reportFile.setText(setting.getReport_path());
+        toggle_startprogram.setSelected(setting.isStartProgram());
+        if (setting.isStartProgram()) toggle_startprogram.setText("ON");
+        else toggle_startprogram.setText("OFF");
+
+        combo_year.getSelectionModel().select(setting.getLimit_year());
+        combo_month.getSelectionModel().select(setting.getLimit_month());
+        combo_day.getSelectionModel().select(setting.getLimit_day());
     }
 
     public void OnFindReportClicked() throws Exception{
@@ -54,6 +73,10 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    public void OnToggleSelected(){
+        if (this.toggle_startprogram.isSelected()) toggle_startprogram.setText("ON");
+        else toggle_startprogram.setText("OFF");
+    }
     public void OnCalculateClicked(){
 
         if (txt_excelLocation.getText().isEmpty() || txt_startDate.getEditor().getText().isEmpty() || txt_endDate.getEditor().getText().isEmpty() ||
@@ -93,8 +116,7 @@ public class MainController implements Initializable {
 
     public void OnSetEmailClicked(){
 
-        SettingsManager settingsManager = SettingsManager.getInstance();
-        settingsManager.getSetting();
+
     }
 
     public void OnLocateReportClicked(){

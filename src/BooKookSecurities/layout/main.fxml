@@ -130,7 +130,7 @@
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ToggleButton id="toggle_startprogram" fx:id="toggle_startprogram" mnemonicParsing="false" prefHeight="23.0" prefWidth="125.0" text="On" />
+                                    <ToggleButton id="toggle_startprogram" fx:id="toggle_startprogram" mnemonicParsing="false" onAction="#OnToggleSelected" prefHeight="23.0" prefWidth="125.0" text="On" />
                                     <Region HBox.hgrow="ALWAYS" />
                                     <Label id="label_alarmtype" text="알림 시간">
                                        <padding>
