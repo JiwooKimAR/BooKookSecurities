@@ -1,6 +1,7 @@
 package BooKookSecurities.Controller;
 
 import BooKookSecurities.Main;
+import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
@@ -115,7 +116,8 @@ public class MainController implements Initializable {
 
 
     public void OnSetEmailClicked(){
-
+        ReportManager reportManager = new ReportManager();
+        reportManager.getReports();
 
     }
 
