@@ -3,6 +3,7 @@ package BooKookSecurities.Controller;
 import BooKookSecurities.Main;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
+import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -37,6 +39,8 @@ public class MainController implements Initializable {
     private ComboBox<String> combo_alarmtype, combo_year, combo_month, combo_day;
 
     private SettingsManager settingsManager;
+    private ReportManager reportManager;
+    private ArrayList<Report> reports;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(label_filelocation.getText());
@@ -45,7 +49,18 @@ public class MainController implements Initializable {
         for (int i = 1; i <= 30; i++) combo_day.getItems().add(Integer.toString(i));
 
 
+        init();
+    }
+    private void init(){
         loadSettings();
+        loadReports();
+    }
+
+    private void loadReports(){
+        reportManager = new ReportManager();
+        reports = reportManager.getReports();
+        Report oldest = reportManager.getOldestReport();
+        label_lastchecked.setText("마지막으로 확인 된 보고서: " + oldest.getItem_name() + ", " + oldest.getDate_difference() + "일 지남.");
     }
     private void loadSettings(){
         settingsManager = SettingsManager.getInstance();
@@ -60,6 +75,7 @@ public class MainController implements Initializable {
         combo_year.getSelectionModel().select(setting.getLimit_year());
         combo_month.getSelectionModel().select(setting.getLimit_month());
         combo_day.getSelectionModel().select(setting.getLimit_day());
+        label_filelocation.setText("파일 위치: " + setting.getReport_path());
     }
 
     public void OnFindReportClicked() throws Exception{
