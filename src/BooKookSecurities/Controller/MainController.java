@@ -83,10 +83,14 @@ public class MainController implements Initializable {
         System.out.println("Find Report Button clicked");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/report.fxml"));
         Parent   root = (Parent) fxmlLoader.load();
+        ReportController reportController = fxmlLoader.getController();
+        reportController.setReports(this.reports);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Reports");
         stage.setScene(new Scene(root));
+
+
         stage.show();
     }
 
