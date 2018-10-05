@@ -4,6 +4,7 @@ import javafx.scene.control.CheckBox;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Report implements Comparable<Report>{
     public static final int NUM_FIELDS = 3;
@@ -12,16 +13,20 @@ public class Report implements Comparable<Report>{
     private Date item_added_date;
     private int date_difference;
     private CheckBox isSelected;
-    public Report() {
-    }
+
 
     public Report(int item_code, String item_name, Date item_added_date) {
         this.item_code = item_code;
         this.item_name = item_name;
         this.item_added_date = item_added_date;
-
+        date_difference = getDifference();
     }
 
+    private int getDifference(){
+        Date curDate = Calendar.getInstance().getTime();
+        long diff = curDate.getTime() - item_added_date.getTime();
+        return (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
     @Override
     public int compareTo(Report o) {
         return getItem_added_date().compareTo(o.getItem_added_date());

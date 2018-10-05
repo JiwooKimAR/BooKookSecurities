@@ -19,16 +19,21 @@ public class ReportManager {
     ArrayList<Report> reports;
     public ReportManager() {
         settingsManager = SettingsManager.getInstance();
-        reports = new ArrayList<>();
+
     }
 
     public ArrayList<Report> getReports(){
-        readReports();
+        if (reports == null || reports.size() == 0) readReports();
         Collections.sort(reports);
         return reports;
     }
 
+    public Report getOldestReport(){
+        if (reports == null || reports.size() == 0) readReports();
+        return reports.get(0);
+    }
     private void readReports(){
+        if (reports == null) reports = new ArrayList<>();
         reports.clear();
         Setting setting = settingsManager.getSetting();
         List<String> reportLines;
@@ -36,7 +41,6 @@ public class ReportManager {
 
         try{
             reportLines = Files.readAllLines(rFile.toPath());
-            Report report = new Report();
             for (String line : reportLines){
 
                 String[] token = line.split(" ");
