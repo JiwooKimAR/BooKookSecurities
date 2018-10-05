@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /*
     리포트 파일 삭제+수정+업데이트 관리
@@ -26,7 +24,7 @@ public class ReportManager {
 
     public ArrayList<Report> getReports(){
         readReports();
-
+        Collections.sort(reports);
         return reports;
     }
 
@@ -37,8 +35,8 @@ public class ReportManager {
         File rFile = new File(setting.getReport_path());
 
         try{
-            Report report = new Report();
             reportLines = Files.readAllLines(rFile.toPath());
+            Report report = new Report();
             for (String line : reportLines){
 
                 String[] token = line.split(" ");
@@ -52,8 +50,8 @@ public class ReportManager {
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
                 Date date = dateFormat.parse(Integer.toString(item_date));
-                System.out.println(item_num + " " + item_date + " " + name);
-                System.out.println(date.toString());
+
+                reports.add(new Report(item_num, name, date));
             }
         }catch (IOException e){
             e.printStackTrace();
