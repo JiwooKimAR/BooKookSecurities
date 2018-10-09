@@ -1,6 +1,7 @@
 package BooKookSecurities.Controller;
 
 import BooKookSecurities.Main;
+import BooKookSecurities.Manager.ExcelManager;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Model.Report;
@@ -110,13 +111,8 @@ public class MainController implements Initializable {
 
         }
     else{
-            //calculate disparate ratio
-            //read excel files in selected directory and create an excel file with results
-//        System.out.println("Calculate disparate ratio");
-//        System.out.println(txt_excelLocation.getText());
-//        System.out.println(txt_startDate.getEditor().getText());
-//        System.out.println(txt_endDate.getEditor().getText());
-//        System.out.println(txt_targetValue.getText());
+            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
+            excelManager.read();
 
 //        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
 //        sender.SendMail("yo", 10);
