@@ -123,6 +123,8 @@ public class MainController implements Initializable {
     public void OnChooseExcelClicked(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Excel Files (*.xlsm)", ".xlsm"));
+        fileChooser.setInitialDirectory(new File("."));
         File selectedFile = fileChooser.showOpenDialog(Main.currentWIndow().getWindow());
         if (selectedFile != null){
             txt_excelLocation.setText(selectedFile.getAbsolutePath());

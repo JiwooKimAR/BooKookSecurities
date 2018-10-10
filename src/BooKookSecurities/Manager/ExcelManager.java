@@ -28,7 +28,6 @@ public class ExcelManager {
         try {
             OPCPackage opcPackage = OPCPackage.open(new File(filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
-            FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
             opcPackage.close();
 
             XSSFSheet sheet = workbook.getSheetAt(0);
