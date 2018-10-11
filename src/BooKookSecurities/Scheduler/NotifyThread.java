@@ -23,11 +23,11 @@ public class NotifyThread implements Runnable {
     	currentTime = Calendar.getInstance();
     	hour = currentTime.get(Calendar.HOUR);
     	passH++;
-    	if ((!DONE) && (sendTime == null)) {
+    	if ((!DONE) && (sendH == null)) {
     		task();
     		setting();
     	}
-    	if ((!DONE) && (Hour == Daytime) {
+    	if ((!DONE) && (hour == Daytime) {
     		task();
     		setting();
     	}
@@ -49,9 +49,9 @@ public class NotifyThread implements Runnable {
     }
     
     private void setting() {
-    	sendTime = hour;
-		DONE = true;
-		passH = 0;
+    	sendH = hour;
+	DONE = true;
+	passH = 0;
     }
 }
 
