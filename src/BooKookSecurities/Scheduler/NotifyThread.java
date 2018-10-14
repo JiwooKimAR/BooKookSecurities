@@ -14,10 +14,10 @@ public class NotifyThread implements Runnable {
     
     private int Limit, Daytime; // 아마도 SettingsManager의 전역변수로 나중에 바뀔 것
     private int hour, passH;
-private int sendH = -1;
+    private int sendH = -1;
     private ArrayList<Report> reports = new ArrayList<>();
     private boolean DONE;
-    private Calendar currentTime;
+    private Calendar currentTime, sendTime;
 
     @Override
     public void run() {
@@ -28,7 +28,7 @@ private int sendH = -1;
     		task();
     		setting();
     	}
-    	if ((!DONE) && (hour == Daytime) {
+    	if ((!DONE) && (hour == Daytime)) {
     		task();
     		setting();
     	}
@@ -51,8 +51,8 @@ private int sendH = -1;
     
     private void setting() {
     	sendH = hour;
-	DONE = true;
-	passH = 0;
+		DONE = true;
+		passH = 0;
     }
 }
 
