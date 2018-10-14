@@ -2,10 +2,15 @@ package BooKookSecurities.Manager;
 
 import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
+import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,6 +27,23 @@ public class ReportManager {
 
     }
 
+    public void writeReports(ObservableList<Report> selected, ObservableList<Report> allReports){
+        List<String> output = new ArrayList<>();
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
+        allReports.removeAll(selected);
+        Collections.sort(allReports);
+        for (Report report : allReports){
+            String line = report.getItem_code() + " \"" + report.getItem_name() + "\" " + df.format(report.getItem_added_date());
+            output.add(line);
+        }
+        try {
+            Path wFile = Paths.get("test.txt");
+            Files.write(wFile, output, Charset.forName("UTF-8"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        System.out.println("done");
+    }
     public ArrayList<Report> getReports(){
         if (reports == null || reports.size() == 0) readReports();
         Collections.sort(reports);

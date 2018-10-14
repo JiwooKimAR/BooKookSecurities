@@ -1,26 +1,29 @@
 package BooKookSecurities.Controller;
 
+import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Model.Report;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
     @FXML
     private TableView<Report> table_report;
     private ArrayList<Report> reportArrayList;
-
+    private ObservableList<Report> selectedIndices = FXCollections.observableArrayList();
+    private ReportManager reportManager;
     @FXML
     private Label label_itemSelected;
 
@@ -28,18 +31,18 @@ public class ReportController implements Initializable {
         System.out.println("cancel clicked");
     }
     public void OnDeleteClicked(){
-        System.out.println("delete clicked");
+        reportManager.writeReports(table_report.getSelectionModel().getSelectedItems(), table_report.getItems());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        reportManager = new ReportManager();
         System.out.println(label_itemSelected.getText());
     }
 
     public void setReports(ArrayList<Report> reports){
         this.reportArrayList = reports;
         fillTable();
-
     }
 
     private void fillTable(){
@@ -59,7 +62,11 @@ public class ReportController implements Initializable {
         table_report.setItems(getReportsList());
         table_report.getColumns().addAll(numCol, nameCol, dateCol, diffCol);
 
-
+        table_report.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        table_report.getSelectionModel().selectedItemProperty().addListener((obs, oldItem, newItem)->{
+            selectedIndices = table_report.getSelectionModel().getSelectedItems();
+            label_itemSelected.setText(selectedIndices.size() + "개가 선택됨.");
+        });
     }
 
     public ObservableList<Report> getReportsList(){
