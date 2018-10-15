@@ -167,9 +167,9 @@ public class TrayManager {
     
  }
   
- public static void main(String args[])
- {
-  new FullTray().test(); 
- }
+// public static void main(String args[])
+// {
+//  new FullTray().test();
+// }
 }
 

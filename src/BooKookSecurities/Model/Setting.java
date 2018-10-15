@@ -3,17 +3,17 @@ package BooKookSecurities.Model;
 public class Setting {
     private String recipient_mail, report_path;
     private boolean isStartProgram;
-    private int limit_year, limit_month, limit_day, time_period;
+    private int limit_year, limit_month, limit_day, time_period_hrs;
 
     public Setting() {
     }
 
-    public int getTime_period() {
-        return time_period;
+    public int getTime_period_hrs() {
+        return time_period_hrs;
     }
 
-    public void setTime_period(int time_period) {
-        this.time_period = time_period;
+    public void setTime_period_hrs(int time_period_hrs) {
+        this.time_period_hrs = time_period_hrs;
     }
 
     public String getRecipient_mail() {

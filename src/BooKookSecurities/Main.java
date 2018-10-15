@@ -1,5 +1,6 @@
 package BooKookSecurities;
 
+import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Scheduler.NotifyScheduler;
 import BooKookSecurities.Scheduler.NotifyThread;
 import javafx.application.Application;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private static Scene mainWindow;
     private static Stage reportScene;
+    private SettingsManager settingsManager;
     NotifyScheduler notifyScheduler;
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -34,8 +36,9 @@ public class Main extends Application {
         System.out.println("program is closed");
     }
     public void init(){
+        settingsManager = SettingsManager.getInstance();
         notifyScheduler = new NotifyScheduler();
-        notifyScheduler.setScheduler(new NotifyThread(), 10);
+        notifyScheduler.setScheduler(new NotifyThread(), 5); //time_period
     }
     public static void main(String[] args) {
         launch(args);

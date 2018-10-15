@@ -85,7 +85,7 @@ public class SettingsManager {
                 else this.setting.setStartProgram(true);
                 break;
             case "time period":
-                this.setting.setTime_period(Integer.parseInt(token[1]));
+                this.setting.setTime_period_hrs(Integer.parseInt(token[1]));
                 break;
 
         }

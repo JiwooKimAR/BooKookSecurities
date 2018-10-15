@@ -45,16 +45,16 @@ public class ReportManager {
         }
         System.out.println("done");
     }
-    public ArrayList<Report> getReports(){
+    public ArrayList<Report> getReports(){ //return report array list
         if (reports == null || reports.size() == 0) readReports();
         Collections.sort(reports);
         return reports;
     }
 
-    public void notifyDataChanged(){
+    public void notifyDataChanged(){ //read the latest report file
         readReports();
     }
-    public Report getOldestReport(){
+    public Report getOldestReport(){ //return the latest report file
         if (reports == null || reports.size() == 0) readReports();
         return reports.get(0);
     }

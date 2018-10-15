@@ -11,7 +11,7 @@ public class NotifyScheduler {
 
     public void setScheduler(Runnable task, int delay){
         //delay in hours
-        scheduler.scheduleAtFixedRate(task, 0, delay, TimeUnit.HOURS  );
+        scheduler.scheduleAtFixedRate(task, 0, delay, TimeUnit.SECONDS  );
     }
 
     public void disableScheduler(){
