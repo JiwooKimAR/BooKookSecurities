@@ -37,7 +37,8 @@ public class ReportManager {
             output.add(line);
         }
         try {
-            Path wFile = Paths.get("test.txt");
+            Setting setting = settingsManager.getSetting();
+            Path wFile = Paths.get(setting.getReport_path());
             Files.write(wFile, output, Charset.forName("UTF-8"));
         }catch (IOException e){
             e.printStackTrace();
@@ -50,13 +51,16 @@ public class ReportManager {
         return reports;
     }
 
+    public void notifyDataChanged(){
+        readReports();
+    }
     public Report getOldestReport(){
         if (reports == null || reports.size() == 0) readReports();
         return reports.get(0);
     }
     private void readReports(){
         if (reports == null) reports = new ArrayList<>();
-        reports.clear();
+        else reports.clear();
         Setting setting = settingsManager.getSetting();
         List<String> reportLines;
         File rFile = new File(setting.getReport_path());

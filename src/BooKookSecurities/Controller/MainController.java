@@ -85,6 +85,9 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/report.fxml"));
         Parent   root = (Parent) fxmlLoader.load();
         ReportController reportController = fxmlLoader.getController();
+
+        reportManager.notifyDataChanged();
+        reports = reportManager.getReports(); //send latest report version
         reportController.setReports(this.reports);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
