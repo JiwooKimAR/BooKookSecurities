@@ -90,6 +90,7 @@ public class MainController implements Initializable {
         reports = reportManager.getReports(); //send latest report version
         reportController.setReports(this.reports);
         Stage stage = new Stage();
+        Main.setReportScene(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Reports");
         stage.setScene(new Scene(root));

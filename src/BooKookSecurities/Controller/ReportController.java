@@ -1,5 +1,6 @@
 package BooKookSecurities.Controller;
 
+import BooKookSecurities.Main;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Model.Report;
 import javafx.beans.InvalidationListener;
@@ -9,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -28,7 +30,7 @@ public class ReportController implements Initializable {
     private Label label_itemSelected;
 
     public void OnCancelClicked(){
-        System.out.println("cancel clicked");
+        Main.getReportScene().close();
     }
     public void OnDeleteClicked(){
         reportManager.writeReports(table_report.getSelectionModel().getSelectedItems(), table_report.getItems());

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private static Scene mainWindow;
+    private static Stage reportScene;
     NotifyScheduler notifyScheduler;
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -42,5 +43,13 @@ public class Main extends Application {
 
     public static Scene currentWIndow(){
         return mainWindow;
+    }
+
+    public static Stage getReportScene() {
+        return reportScene;
+    }
+
+    public static void setReportScene(Stage reportScene) {
+        Main.reportScene = reportScene;
     }
 }
