@@ -50,7 +50,7 @@ public class NotifyThread implements Runnable {
 
         curTime = GregorianCalendar.getInstance();
         for (Report report : reports){
-            if (!isOutdated(report)){ //if outdated
+            if (isOutdated(report)){ //if outdated
                 //send report
                 System.out.println("Outdated: " + report.getItem_name() + " Days passed: " + report.getDate_difference());
             }
@@ -84,9 +84,9 @@ public class NotifyThread implements Runnable {
 //        System.out.println("Years: " + years_in_between + " Months: " + months_in_between + " Days: " + days_in_between);
 
         if (years_in_between >= limit_year && months_in_between >= limit_month && days_in_between >= limit_day){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     private void task() {
 //        ReportManager.readReport();

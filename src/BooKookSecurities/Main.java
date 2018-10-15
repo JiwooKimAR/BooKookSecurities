@@ -38,7 +38,7 @@ public class Main extends Application {
     public void init(){
         settingsManager = SettingsManager.getInstance();
         notifyScheduler = new NotifyScheduler();
-        notifyScheduler.setScheduler(new NotifyThread(), 5); //time_period
+        notifyScheduler.setScheduler(new NotifyThread(), settingsManager.getSetting().getTime_period_hrs()); //time_period
     }
     public static void main(String[] args) {
         launch(args);
