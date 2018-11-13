@@ -55,4 +55,21 @@ public class Main extends Application {
     public static void setReportScene(Stage reportScene) {
         Main.reportScene = reportScene;
     }
+    
+    TrayIconHandler.registerTrayIcon(
+		Toolkit.getDefaultToolkit().getImage("src/main/resources/icon/computer.png"),
+		"Example",
+		new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Open your application here.
+			}
+		}
+	);
+	TrayIconHandler.addItem("Exit", new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	});
 }
