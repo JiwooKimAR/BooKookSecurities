@@ -1,175 +1,234 @@
-package BooKookSecurities.Manager;  
+package org.silentsoft.core.tray;
 
-/*일단 JAVAFX에 대한 system tray 정보가 충분하지 않아 swing으로 하였고
- * 창을 최소화 하면 트레이에 들어가고 더블클릭하면 메인APP가 튀어나오도록 하는 기능입니다.
- * 이후 많은 수정을 거쳐야 함. 
- */
+import java.awt.AWTException;
+import java.awt.CheckboxMenuItem;
+import java.awt.Image;
+import java.awt.Menu;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.TrayIcon.MessageType;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.event.*;
-public class TrayManager {
-  static class ShowMessageListener implements ActionListener {
-    TrayIcon trayIcon;
-    String title;
-    String message;
-    TrayIcon.MessageType messageType;
-    ShowMessageListener(
-        TrayIcon trayIcon,
-        String title,
-        String message,
-        TrayIcon.MessageType messageType) {
-      this.trayIcon = trayIcon;
-      this.title = title;
-      this.message = message;
-      this.messageType = messageType;
-    }
-    public void actionPerformed(ActionEvent e) {
-      trayIcon.displayMessage(title, message, messageType);
-    }
-  }
-  JFrame frame=new JFrame("System Tray Demo"); 
-  public void test()
-  {
-   frame.addWindowListener(new WindowListener()
-   {
-    public void windowOpened(WindowEvent e){}
-       public void windowClosing(WindowEvent e){}
-       public void windowClosed(WindowEvent e){}
-       public void windowIconified(WindowEvent e){ 
-        frame.setVisible(false);     
-        displayTrayIcon();
-       }
-       public void windowDeiconified(WindowEvent e){}
-       public void windowActivated(WindowEvent e){
-         System.out.println("windowActivated");
-       }
-       public void windowDeactivated(WindowEvent e){}
-   });
-   frame.getContentPane().add(new JButton("Hello"));
-   frame.setSize(400,500);
-   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   frame.setVisible(true);
- }
-  
-  
-   public void displayMainApp()
-   {                                         
-        frame.setVisible(true);
-        frame.setExtendedState(Frame.NORMAL);
-   }
-  
- public void displayTrayIcon()
- {
-  Runnable runner = new Runnable()
-  {
-   public void run()
-   {
-    if(SystemTray.isSupported())
-    {
-     MenuItem item;
-          
-     final SystemTray tray = SystemTray.getSystemTray();
-     Image image = Toolkit.getDefaultToolkit().getImage("D:/myproject/JRun4/servers/manual/src/com/imnetpia/exbill/webmanual/app/gifIcon.gif");
-    
-     PopupMenu popup = new PopupMenu();
-     final TrayIcon trayIcon = new TrayIcon(image, "The Tip Text", popup);
-    
-     ActionListener actionListener = new ActionListener()
-     {
-      public void actionPerformed(ActionEvent e)
-      {
-       trayIcon.displayMessage("Action Event", 
-         "An Action Event Has Been Peformed!",
-         TrayIcon.MessageType.INFO);
-      }
-     };
-             
-     MouseListener mouseListener = new MouseListener()
-     {                
-      public void mouseClicked(MouseEvent e)
-      {
-       System.out.println("Tray Icon - Mouse clicked!");                 
-      }
-      public void mouseEntered(MouseEvent e)
-      {
-       System.out.println("Tray Icon - Mouse entered!");                 
-      }
-      public void mouseExited(MouseEvent e)
-      {
-       System.out.println("Tray Icon - Mouse exited!");                 
-      }
-      public void mousePressed(MouseEvent e)
-      {
-       if(e.getClickCount() == 2)
-       {
-        tray.remove(tray.getTrayIcons()[0]);
-        displayMainApp();
-       }       
-      }
-      public void mouseReleased(MouseEvent e)
-      {
-       System.out.println("Tray Icon - Mouse released!");                 
-      }
-     };
-    
-     ActionListener viewApp = new ActionListener()
-     {
-      public void actionPerformed(ActionEvent e)
-      {
-       tray.remove(tray.getTrayIcons()[0]);                                           
-       displayMainApp();
-      }
-     };
-     item = new MenuItem("Main APP");
-     item.addActionListener(viewApp);
-     popup.add(item);
-     item.addActionListener(new ShowMessageListener(trayIcon,"Error Title", "Error", TrayIcon.MessageType.ERROR));
-     popup.add(item);
-     item = new MenuItem("Warning");
-     item.addActionListener(new ShowMessageListener(trayIcon,"Warning Title", "Warning", TrayIcon.MessageType.WARNING));
-     popup.add(item);
-     item = new MenuItem("Info");
-     item.addActionListener(new ShowMessageListener(trayIcon,"Info Title", "Info", TrayIcon.MessageType.INFO));
-     popup.add(item);
-     item = new MenuItem("None");
-     item.addActionListener(new ShowMessageListener(trayIcon,"None Title", "None", TrayIcon.MessageType.NONE));
-     popup.add(item);
-     item = new MenuItem("Close");
-           
-     item.addActionListener(new ActionListener()
-     {
-      public void actionPerformed(ActionEvent e)
-      {      
-       tray.remove(trayIcon);
-      }
-     });
-     popup.add(item);
-     try
-     {
-      tray.add(trayIcon);
-               trayIcon.setImageAutoSize(true);
-               trayIcon.addActionListener(actionListener);
-               trayIcon.addMouseListener(mouseListener);
-     }catch(AWTException e)
-     {
-      System.err.println("Can't add to tray");
-     }
-           }
-           else
-           {
-             System.err.println("Tray unavailable");
-           }
-         }
-      };
-      EventQueue.invokeLater(runner);
-    
- }
-  
-// public static void main(String args[])
-// {
-//  new FullTray().test();
-// }
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public final class TrayIconHandler {
+
+	private static Logger LOGGER = LoggerFactory
+			.getLogger(TrayIconHandler.class);
+
+	private static TrayIcon trayIcon;
+
+	private static PopupMenu getPopupMenu() {
+		PopupMenu popupMenu = trayIcon.getPopupMenu();
+
+		if (popupMenu == null) {
+			popupMenu = new PopupMenu();
+		}
+
+		return popupMenu;
+	}
+
+	private static void add(MenuItem item) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		PopupMenu popupMenu = getPopupMenu();
+		popupMenu.add(item);
+
+		trayIcon.setPopupMenu(popupMenu);
+	}
+
+	private static void addToMenu(String menu, MenuItem item) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		if (isNotExistsMenu(menu)) {
+			addMenu(menu);
+		}
+
+		for (int i = 0, j = getPopupMenu().getItemCount(); i < j; i++) {
+			if (getPopupMenu().getItem(i) instanceof Menu) {
+				Menu menuitem = (Menu) getPopupMenu().getItem(i);
+				if (menuitem.getLabel().equals(menu)) {
+					menuitem.add(item);
+
+					getPopupMenu().insert(menuitem, i);
+
+					break;
+				}
+			}
+		}
+	}
+
+	public static boolean isRegistered() {
+		return (trayIcon != null && getPopupMenu() != null) ? true : false;
+	}
+
+	public static boolean isNotRegistered() {
+		return !isRegistered();
+	}
+
+	public static boolean isExistsMenu(String menu) {
+		if (isNotRegistered()) {
+			return false;
+		}
+
+		for (int i = 0, j = getPopupMenu().getItemCount(); i < j; i++) {
+			if (getPopupMenu().getItem(i) instanceof Menu) {
+				Menu item = (Menu) getPopupMenu().getItem(i);
+				if (item.getLabel().equals(menu)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isNotExistsMenu(String menu) {
+		return !isExistsMenu(menu);
+	}
+
+	public static void registerTrayIcon(Image image) {
+		registerTrayIcon(image, null, null);
+	}
+
+	public static void registerTrayIcon(Image image, String toolTip) {
+		registerTrayIcon(image, toolTip, null);
+	}
+
+	public static void registerTrayIcon(Image image, String toolTip,
+			ActionListener action) {
+		if (SystemTray.isSupported()) {
+			if (trayIcon != null) {
+				trayIcon = null;
+			}
+
+			trayIcon = new TrayIcon(image);
+			trayIcon.setImageAutoSize(true);
+
+			if (toolTip != null) {
+				trayIcon.setToolTip(toolTip);
+			}
+
+			if (action != null) {
+				trayIcon.addActionListener(action);
+			}
+
+			try {
+				for (TrayIcon registeredTrayIcon : SystemTray.getSystemTray()
+						.getTrayIcons()) {
+					SystemTray.getSystemTray().remove(registeredTrayIcon);
+				}
+
+				SystemTray.getSystemTray().add(trayIcon);
+			} catch (AWTException e) {
+				LOGGER.error("I got catch an error during add system tray !", e);
+			}
+		} else {
+			LOGGER.error("System tray is not supported !");
+		}
+	}
+
+	public static void setToolTip(String toolTip) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		trayIcon.setToolTip(toolTip);
+	}
+
+	public static void setImage(Image image) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		trayIcon.setImage(image);
+	}
+
+	public static void displayMessage(String caption, String text,
+			MessageType messageType) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		trayIcon.displayMessage(caption, text, messageType);
+	}
+
+	public static void addSeparator() {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		getPopupMenu().addSeparator();
+	}
+
+	public static void addSeparator(String menu) {
+		if (isNotRegistered()) {
+			return;
+		}
+
+		for (int i = 0, j = getPopupMenu().getItemCount(); i < j; i++) {
+			if (getPopupMenu().getItem(i) instanceof Menu) {
+				Menu item = (Menu) getPopupMenu().getItem(i);
+				if (item.getLabel().equals(menu)) {
+					item.addSeparator();
+
+					getPopupMenu().insert(item, i);
+
+					break;
+				}
+			}
+		}
+	}
+
+	public static void addMenu(String menu) {
+		add(new Menu(menu));
+	}
+
+	public static void addItem(String label, ActionListener action) {
+		MenuItem menuItem = new MenuItem(label);
+		menuItem.addActionListener(action);
+
+		add(menuItem);
+	}
+
+	public static void addCheckBox(String label, ItemListener action) {
+		addCheckBox(label, false, action);
+	}
+
+	public static void addCheckBox(String label, boolean state,
+			ItemListener action) {
+		CheckboxMenuItem checkboxMenuItem = new CheckboxMenuItem(label, state);
+		checkboxMenuItem.addItemListener(action);
+
+		add(checkboxMenuItem);
+	}
+
+	public static void addItemToMenu(String menu, String label,
+			ActionListener action) {
+		MenuItem menuItem = new MenuItem(label);
+		menuItem.addActionListener(action);
+
+		addToMenu(menu, menuItem);
+	}
+
+	public static void addCheckBoxToMenu(String menu, String label,
+			ItemListener action) {
+		addCheckBoxToMenu(menu, label, false, action);
+	}
+
+	public static void addCheckBoxToMenu(String menu, String label,
+			boolean state, ItemListener action) {
+		CheckboxMenuItem checkboxMenuItem = new CheckboxMenuItem(label, state);
+		checkboxMenuItem.addItemListener(action);
+
+		addToMenu(menu, checkboxMenuItem);
+	}
 }
-
