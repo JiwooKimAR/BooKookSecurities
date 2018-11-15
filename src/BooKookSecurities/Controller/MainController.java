@@ -108,6 +108,7 @@ public class MainController implements Initializable {
         Parent root = (Parent) fxmlLoader.load();
         ExcelInputController excelInputController = fxmlLoader.getController();
 
+        excelInputController.setExcelInputs(Main.getExcelInputs());
         Stage stage = new Stage();
         Main.setExcelInputScene(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
