@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +56,27 @@ public class ReportController implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("item_name"));
 
         TableColumn<Report, Date> dateCol = new TableColumn<>("Date Added");
+
+        //display of date format
+        dateCol.setCellFactory(column->{
+            TableCell<Report, Date> cell = new TableCell<Report, Date>(){
+                private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty){
+                        setText(null);
+                    }
+                    else
+                        this.setText(format.format(item));
+                }
+            };
+
+            return cell;
+        });
         dateCol.setCellValueFactory(new PropertyValueFactory<>("item_added_date"));
+
 
         TableColumn<Report, Integer> diffCol = new TableColumn<>("Days Passed");
         diffCol.setCellValueFactory(new PropertyValueFactory<>("date_difference"));
