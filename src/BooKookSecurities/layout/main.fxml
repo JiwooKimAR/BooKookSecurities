@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -15,13 +14,13 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BooKookSecurities.Controller.MainController">
+<AnchorPane prefHeight="197.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BooKookSecurities.Controller.MainController">
    <children>
       <TabPane id="tab_main" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <tabs>
           <Tab id="tab_execute" text="실행">
                <content>
-                  <VBox prefWidth="600.0" spacing="10.0">
+                  <VBox prefWidth="600.0" spacing="9.0">
                      <children>
                         <Label id="label_filelocation" fx:id="label_filelocation" text="파일 위치:">
                            <VBox.margin>
@@ -35,10 +34,13 @@
                               <Button id="btn_findReports" fx:id="btn_findReports" mnemonicParsing="false" onAction="#OnFindReportClicked" prefHeight="23.0" prefWidth="131.0" text="확인" />
                            </children>
                         </HBox>
-                        <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Separator>
                         <HBox>
                            <children>
-                              <TextField id="txt_excelLocation" fx:id="txt_excelLocation" HBox.hgrow="ALWAYS">
+                              <TextField id="txt_excelLocation" fx:id="txt_excelLocation" promptText="엑셀 파일 위치" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -48,30 +50,22 @@
                         </HBox>
                         <HBox spacing="10.0">
                            <children>
-                              <Label id="label_startdate" text="시작 날짜">
+                              <Label id="label_startdate" fx:id="label_inputDscrp" text="Description of Input">
                                  <padding>
                                     <Insets top="5.0" />
                                  </padding>
                               </Label>
-                              <DatePicker id="txt_startDate" fx:id="txt_startDate" HBox.hgrow="ALWAYS" />
                               <Region HBox.hgrow="ALWAYS" />
-                              <Label id="label_enddate" text="종료 날짜">
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </Label>
-                              <DatePicker id="txt_endDate" fx:id="txt_endDate" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox layoutX="20.0" layoutY="162.0" spacing="10.0">
                            <children>
-                              <Label id="label_targetValue" text="목표 주가">
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TextField id="txt_targetValue" fx:id="txt_targetValue" HBox.hgrow="ALWAYS" />
                               <Region HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" onAction="#OnGetInputClicked" prefHeight="23.0" prefWidth="115.0" text="값 입력">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
                               <Button id="btn_calculateRatio" fx:id="btn_calculateRatio" mnemonicParsing="false" onAction="#OnCalculateClicked" prefHeight="23.0" prefWidth="131.0" text="괴리율 계산" />
                            </children>
                         </HBox>
@@ -152,11 +146,13 @@
                                     <ComboBox id="combo_day" fx:id="combo_day" prefHeight="23.0" prefWidth="115.0" promptText="일" />
                                     <Region HBox.hgrow="ALWAYS" />
                                  </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
                               </HBox>
-                              <Region prefHeight="200.0" prefWidth="200.0" />
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefWidth="200.0">
                                  <children>
-                                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
                                     <Button id="btn_modify" mnemonicParsing="false" onAction="#OnUpdateClicked" prefHeight="23.0" prefWidth="168.0" text="변경" />
                                  </children>
                               </HBox>
@@ -173,10 +169,10 @@
         </tabs>
       </TabPane>
    </children>
-   <padding>
-      <Insets bottom="15.0" />
-   </padding>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
 </AnchorPane>

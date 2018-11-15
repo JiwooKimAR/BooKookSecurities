@@ -29,11 +29,9 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private Label label_filelocation, label_lastchecked; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
+    private Label label_filelocation, label_lastchecked, labe_inputDscrp; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
     @FXML
-    private DatePicker txt_endDate, txt_startDate;
-    @FXML
-    private TextField txt_targetValue, txt_excelLocation, txt_email, txt_reportFile;
+    private TextField txt_excelLocation, txt_email, txt_reportFile;
     @FXML
     private ToggleButton toggle_startprogram;
     @FXML
@@ -61,7 +59,7 @@ public class MainController implements Initializable {
         reportManager = new ReportManager();
         reports = reportManager.getReports();
         Report oldest = reportManager.getOldestReport();
-        label_lastchecked.setText("마지막으로 확인 된 보고서: " + oldest.getItem_name() + ", " + oldest.getDate_difference() + "일 지남.");
+        label_lastchecked.setText(" 마지막으로 확인 된 보고서: " + oldest.getItem_name() + ", " + oldest.getDate_difference() + "일 지남.");
     }
     private void loadSettings(){
         settingsManager = SettingsManager.getInstance();
@@ -76,7 +74,7 @@ public class MainController implements Initializable {
         combo_year.getSelectionModel().select(setting.getLimit_year());
         combo_month.getSelectionModel().select(setting.getLimit_month());
         combo_day.getSelectionModel().select(setting.getLimit_day());
-        label_filelocation.setText("파일 위치: " + setting.getReport_path());
+        label_filelocation.setText(" 파일 위치: " + setting.getReport_path());
     }
 
     public void OnFindReportClicked() throws Exception{
@@ -103,36 +101,24 @@ public class MainController implements Initializable {
         if (this.toggle_startprogram.isSelected()) toggle_startprogram.setText("ON");
         else toggle_startprogram.setText("OFF");
     }
-    public void OnCalculateClicked() throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/excel_input.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        ExcelInputController excelInputController = fxmlLoader.getController();
+    public void OnCalculateClicked(){
 
-        excelInputController.setExcelInputs(Main.getExcelInputs());
-        Stage stage = new Stage();
-        Main.setExcelInputScene(stage);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Excel Inputs");
-        stage.setScene(new Scene(root));
 
-        stage.show();
-//
-//        if (txt_excelLocation.getText().isEmpty() || txt_startDate.getEditor().getText().isEmpty() || txt_endDate.getEditor().getText().isEmpty() ||
-//            txt_targetValue.getText().isEmpty()){
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("경고");
-//            alert.setContentText("빈 칸을 채워주세요.");
-//
-//            alert.showAndWait();
-//
-//        }
-//    else{
-//            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
-//            excelManager.read();
-//
-////        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
-////        sender.SendMail("yo", 10);
-//        }
+        if (txt_excelLocation.getText().isEmpty() || Main.getExcelInputs().size() == 0){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("경고");
+            alert.setContentText("옳바르지 않은 입력입니다.");
+
+            alert.showAndWait();
+
+        }
+    else{
+            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
+            excelManager.read();
+
+//        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
+//        sender.SendMail("yo", 10);
+        }
 
     }
 
@@ -145,6 +131,21 @@ public class MainController implements Initializable {
         if (selectedFile != null){
             txt_excelLocation.setText(selectedFile.getAbsolutePath());
         }
+    }
+
+    public void OnGetInputClicked() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/excel_input.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        ExcelInputController excelInputController = fxmlLoader.getController();
+
+        excelInputController.setExcelInputs(Main.getExcelInputs());
+        Stage stage = new Stage();
+        Main.setExcelInputScene(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Excel Inputs");
+        stage.setScene(new Scene(root));
+
+        stage.show();
     }
 
 
