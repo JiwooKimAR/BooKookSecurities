@@ -120,7 +120,7 @@ public class MainController implements Initializable {
     else{
             ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
             excelManager.read();
-
+            excelManager.write("test.xlsx");
 //        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
 //        sender.SendMail("yo", 10);
         }
