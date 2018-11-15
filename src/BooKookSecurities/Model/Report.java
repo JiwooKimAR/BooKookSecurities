@@ -2,6 +2,7 @@ package BooKookSecurities.Model;
 
 import javafx.scene.control.CheckBox;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ public class Report implements Comparable<Report>{
     private String item_name;
     private Date item_added_date;
     private int date_difference;
-    private CheckBox isSelected;
+
 
 
     public Report(int item_code, String item_name, Date item_added_date) {
@@ -65,11 +66,4 @@ public class Report implements Comparable<Report>{
     }
 
 
-    public CheckBox getIsSelected() {
-        return isSelected;
-    }
-
-    public void setIsSelected(CheckBox isSelected) {
-        this.isSelected = isSelected;
-    }
 }
