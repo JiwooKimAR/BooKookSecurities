@@ -17,12 +17,17 @@ public class ExcelInputController {
 
     private ObservableList<ExcelInput> excelInputs;
     public void OnAddClicked(){
-        System.out.println(txtEnddate.getEditor().getText() + txtStartdate.getEditor().getText() + " " + txtTarget.getText());
+        if (txtStartdate.getEditor().getText() == "" || txtEnddate.getEditor().getText() =="" || txtTarget.getText().equals("")){
+            System.out.println("One of the fields is empty.");
+        }else{
+            LocalDate startDate = txtStartdate.getConverter().fromString(txtStartdate.getEditor().getText());
+            LocalDate endDate = txtEnddate.getConverter().fromString(txtEnddate.getEditor().getText());
+            int targetValue = Integer.parseInt(txtTarget.getText());
 
-        LocalDate start = txtStartdate.getConverter().fromString(txtStartdate.getEditor().getText());
+            ExcelInput newInput = new ExcelInput(startDate, endDate, targetValue);
+            excelInputs.add(newInput);
 
-        int temp = start.getDayOfMonth();
-        System.out.println(temp);
+        }
     }
 
     public void setExcelInputs(ObservableList<ExcelInput> excelInputs) {
