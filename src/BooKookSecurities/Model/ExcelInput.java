@@ -3,7 +3,7 @@ package BooKookSecurities.Model;
 
 import java.time.LocalDate;
 
-public class ExcelInput {
+public class ExcelInput implements Comparable<ExcelInput>{
     LocalDate startDate, endDate;
     int targetValue;
 
@@ -38,5 +38,10 @@ public class ExcelInput {
 
     public void setTargetValue(int targetValue) {
         this.targetValue = targetValue;
+    }
+
+    @Override
+    public int compareTo(ExcelInput o) {
+        return getStartDate().compareTo(o.getStartDate());
     }
 }

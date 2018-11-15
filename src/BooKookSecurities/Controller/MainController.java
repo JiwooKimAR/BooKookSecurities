@@ -4,10 +4,12 @@ import BooKookSecurities.Main;
 import BooKookSecurities.Manager.ExcelManager;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
+import BooKookSecurities.Model.ExcelInput;
 import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,11 +27,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private Label label_filelocation, label_lastchecked, labe_inputDscrp; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
+    private Label label_filelocation, label_lastchecked, label_inputDscrp; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
     @FXML
     private TextField txt_excelLocation, txt_email, txt_reportFile;
     @FXML
@@ -53,6 +56,7 @@ public class MainController implements Initializable {
     private void init(){
         loadSettings();
         loadReports();
+        updateInputDscrp();
     }
 
     private void loadReports(){
@@ -95,6 +99,7 @@ public class MainController implements Initializable {
 
 
         stage.show();
+
     }
 
     public void OnToggleSelected(){
@@ -144,16 +149,27 @@ public class MainController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Excel Inputs");
         stage.setScene(new Scene(root));
-
+        stage.setOnHidden(e -> this.updateInputDscrp());
         stage.show();
     }
 
 
+    private void updateInputDscrp(){
+        ObservableList<ExcelInput> excelInputs = Main.getExcelInputs();
+        int size = excelInputs.size();
+        if (size == 0){
+            label_inputDscrp.setText("입력된 값이 없습니다.");
+        }
+        else{
+            Collections.sort(excelInputs);
 
+            label_inputDscrp.setText("입력된 수: " + size + ", 전체 기간: " + excelInputs.get(0).getStartDate().toString() + " ~ "
+                    + excelInputs.get(size - 1).getEndDate().toString());
+        }
+    }
     public void OnSetEmailClicked(){
         ReportManager reportManager = new ReportManager();
         reportManager.getReports();
-
     }
 
     public void OnLocateReportClicked(){

@@ -54,15 +54,6 @@ public class Main extends Application {
         notifyScheduler.setScheduler(new NotifyThread(), settingsManager.getSetting().getTime_period_hrs()); //time_period
 
         excelInputs = FXCollections.observableArrayList();
-        ExcelInput excelInput = new ExcelInput();
-        LocalDate localDate = LocalDate.of(2018, 11, 10);
-        LocalDate endDAte = LocalDate.of(2018, 11, 15);
-
-        excelInput.setStartDate(localDate);
-        excelInput.setEndDate(endDAte);
-        excelInput.setTargetValue(1000);
-
-        excelInputs.add(excelInput);
 
     }
 
