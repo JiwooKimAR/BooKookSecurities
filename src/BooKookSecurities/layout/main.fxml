@@ -60,6 +60,11 @@
                         </HBox>
                         <HBox layoutX="20.0" layoutY="162.0" spacing="10.0">
                            <children>
+                              <Label fx:id="label_progress" text="Progress">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Label>
                               <Region HBox.hgrow="ALWAYS" />
                               <Button mnemonicParsing="false" onAction="#OnGetInputClicked" prefHeight="23.0" prefWidth="115.0" text="값 입력">
                                  <HBox.margin>

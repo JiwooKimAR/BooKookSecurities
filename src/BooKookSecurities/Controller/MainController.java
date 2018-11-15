@@ -9,6 +9,7 @@ import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
+import BooKookSecurities.Util.TimeUtil;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,13 +27,16 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalField;
+import java.util.*;
 
 public class MainController implements Initializable {
     @FXML
-    private Label label_filelocation, label_lastchecked, label_inputDscrp; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
+    private Label label_filelocation, label_lastchecked, label_inputDscrp, label_progress; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
     @FXML
     private TextField txt_excelLocation, txt_email, txt_reportFile;
     @FXML
@@ -57,6 +61,8 @@ public class MainController implements Initializable {
         loadSettings();
         loadReports();
         updateInputDscrp();
+
+        label_progress.setText("");
     }
 
     private void loadReports(){
@@ -118,9 +124,14 @@ public class MainController implements Initializable {
 
         }
     else{
+            label_progress.setText("계산중...");
             ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
             excelManager.read();
             excelManager.write("test.xlsx");
+            Date date = Calendar.getInstance().getTime();
+            long getTime = date.getTime();
+
+            label_progress.setText(TimeUtil.getCurrentTime() + ": 파일 저장됨.");
 //        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
 //        sender.SendMail("yo", 10);
         }
