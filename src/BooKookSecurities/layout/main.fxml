@@ -23,12 +23,12 @@
                <content>
                   <VBox prefWidth="600.0" spacing="10.0">
                      <children>
-                        <Label id="label_filelocation" fx:id="label_filelocation" text="파일 위치: ">
+                        <Label id="label_filelocation" fx:id="label_filelocation" text="파일 위치:">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Label id="label_lastchecked" fx:id="label_lastchecked" text="마지막으로 확인 된 보고서: " />
+                        <Label id="label_lastchecked" fx:id="label_lastchecked" text="마지막으로 확인 된보고서: " />
                         <HBox>
                            <children>
                               <Region HBox.hgrow="ALWAYS" />

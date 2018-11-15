@@ -103,24 +103,35 @@ public class MainController implements Initializable {
         if (this.toggle_startprogram.isSelected()) toggle_startprogram.setText("ON");
         else toggle_startprogram.setText("OFF");
     }
-    public void OnCalculateClicked(){
+    public void OnCalculateClicked() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/excel_input.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        ExcelInputController excelInputController = fxmlLoader.getController();
 
-        if (txt_excelLocation.getText().isEmpty() || txt_startDate.getEditor().getText().isEmpty() || txt_endDate.getEditor().getText().isEmpty() ||
-            txt_targetValue.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("경고");
-            alert.setContentText("빈 칸을 채워주세요.");
+        Stage stage = new Stage();
+        Main.setExcelInputScene(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Excel Inputs");
+        stage.setScene(new Scene(root));
 
-            alert.showAndWait();
-
-        }
-    else{
-            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
-            excelManager.read();
-
-//        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
-//        sender.SendMail("yo", 10);
-        }
+        stage.show();
+//
+//        if (txt_excelLocation.getText().isEmpty() || txt_startDate.getEditor().getText().isEmpty() || txt_endDate.getEditor().getText().isEmpty() ||
+//            txt_targetValue.getText().isEmpty()){
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("경고");
+//            alert.setContentText("빈 칸을 채워주세요.");
+//
+//            alert.showAndWait();
+//
+//        }
+//    else{
+//            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
+//            excelManager.read();
+//
+////        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
+////        sender.SendMail("yo", 10);
+//        }
 
     }
 

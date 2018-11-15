@@ -1,6 +1,7 @@
 package BooKookSecurities;
 
 import BooKookSecurities.Manager.SettingsManager;
+import BooKookSecurities.Model.ExcelInput;
 import BooKookSecurities.Scheduler.NotifyScheduler;
 import BooKookSecurities.Scheduler.NotifyThread;
 import javafx.application.Application;
@@ -11,10 +12,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main extends Application {
     private static Scene mainWindow;
     private static Stage reportScene;
+    private static Stage excelinputScene;
+    private ArrayList<ExcelInput> excelInputs;
     private SettingsManager settingsManager;
     NotifyScheduler notifyScheduler;
 
@@ -33,6 +37,8 @@ public class Main extends Application {
             notifyScheduler.disableScheduler();
             Platform.exit();
         });
+
+
     }
 
     private void closeProgram() {
@@ -43,6 +49,8 @@ public class Main extends Application {
         settingsManager = SettingsManager.getInstance();
         notifyScheduler = new NotifyScheduler();
         notifyScheduler.setScheduler(new NotifyThread(), settingsManager.getSetting().getTime_period_hrs()); //time_period
+
+        excelInputs = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -61,8 +69,9 @@ public class Main extends Application {
         Main.reportScene = reportScene;
     }
 
-
-
+    public static void setExcelInputScene(Stage excelInputScene){
+        Main.excelinputScene = excelInputScene;
+    }
 //    org.silentsoft.core.tray.TrayIconHandler.registerTrayIcon(
 //		Toolkit.getDefaultToolkit().getImage("src/main/resources/icon/computer.png"),
 //		"Example", new ActionListener() {
