@@ -6,5 +6,19 @@
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
 	<classpathentry kind="lib" path="lib/javax.activation-api-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/mail-1.5.0-b01.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/poi-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/poi-excelant-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/poi-ooxml-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/poi-ooxml-schemas-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/poi-scratchpad-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/xmlbeans-3.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/activation.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/commons-compress-1.18.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/javax.activation-api-1.2.0.jar"/>
+	<classpathentry kind="lib" path="D:/School stuff/2018 - 2/Cop Project/lib/mail-1.5.0-b01.jar"/>
 	<classpathentry kind="output" path="out/production/BooKook"/>
 </classpath>
