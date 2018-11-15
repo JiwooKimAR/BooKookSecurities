@@ -61,7 +61,7 @@ public class Main extends Application {
         Main.reportScene = reportScene;
     }
 
-}
+
 
 //    org.silentsoft.core.tray.TrayIconHandler.registerTrayIcon(
 //		Toolkit.getDefaultToolkit().getImage("src/main/resources/icon/computer.png"),
@@ -78,4 +78,4 @@ public class Main extends Application {
 //			System.exit(0);
 //		}
 //	});
-//}
+}
