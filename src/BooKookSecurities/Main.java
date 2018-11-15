@@ -10,13 +10,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class Main extends Application {
     private static Scene mainWindow;
     private static Stage reportScene;
     private SettingsManager settingsManager;
     NotifyScheduler notifyScheduler;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("layout/main.fxml"));
         primaryStage.setTitle("부국증권");
         mainWindow = new Scene(root);
@@ -32,19 +35,21 @@ public class Main extends Application {
         });
     }
 
-    private void closeProgram(){
+    private void closeProgram() {
         System.out.println("program is closed");
     }
-    public void init(){
+
+    public void init() {
         settingsManager = SettingsManager.getInstance();
         notifyScheduler = new NotifyScheduler();
         notifyScheduler.setScheduler(new NotifyThread(), settingsManager.getSetting().getTime_period_hrs()); //time_period
     }
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static Scene currentWIndow(){
+    public static Scene currentWIndow() {
         return mainWindow;
     }
 
@@ -55,21 +60,22 @@ public class Main extends Application {
     public static void setReportScene(Stage reportScene) {
         Main.reportScene = reportScene;
     }
-    
-    TrayIconHandler.registerTrayIcon(
-		Toolkit.getDefaultToolkit().getImage("src/main/resources/icon/computer.png"),
-		"Example",
-		new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Open your application here.
-			}
-		}
-	);
-	TrayIconHandler.addItem("Exit", new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-		}
-	});
+
 }
+
+//    org.silentsoft.core.tray.TrayIconHandler.registerTrayIcon(
+//		Toolkit.getDefaultToolkit().getImage("src/main/resources/icon/computer.png"),
+//		"Example", new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// Open your application here.
+//			}
+//		}
+//	);
+//	org.silentsoft.core.tray.TrayIconHandler.addItem("Exit", new ActionListener() {
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			System.exit(0);
+//		}
+//	});
+//}
