@@ -11,6 +11,7 @@ import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 import BooKookSecurities.Util.EmailSender;
 import BooKookSecurities.Util.TimeUtil;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,7 +45,7 @@ public class MainController implements Initializable {
     private ToggleButton toggle_startprogram;
     @FXML
     private ComboBox<String> combo_alarmtype, combo_year, combo_month, combo_day;
-
+    public Label label_notification;
     private SettingsManager settingsManager;
     private ReportManager reportManager;
     private ArrayList<Report> reports;
@@ -64,6 +65,7 @@ public class MainController implements Initializable {
         updateInputDscrp();
 
         label_progress.setText("");
+        Main.setLabel_notification(label_notification);
     }
 
     private void loadReports(){
@@ -192,4 +194,13 @@ public class MainController implements Initializable {
         System.out.println("update clicked");
     }
 
+    public void setNotificationText(String text){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                label_notification.setText(text);
+            }
+        });
+    }
 }

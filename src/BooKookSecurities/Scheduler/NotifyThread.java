@@ -1,9 +1,11 @@
 package BooKookSecurities.Scheduler;
 
+import BooKookSecurities.Controller.MainController;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +38,12 @@ public class NotifyThread implements Runnable {
     private ArrayList<Report> reports;
     private Calendar curTime;
     private int limit_year, limit_month, limit_day;
+    private MainController controller;
+
+    public NotifyThread(MainController controller) {
+        this.controller = controller;
+    }
+
     @Override
     public void run() {
         System.out.println("Running");
@@ -49,12 +57,23 @@ public class NotifyThread implements Runnable {
         limit_day = setting.getLimit_day();
 
         curTime = GregorianCalendar.getInstance();
+        int cnt_notifiaction = 0;
         for (Report report : reports){
             if (isOutdated(report)){ //if outdated
                 //send report
+                cnt_notifiaction++;
                 System.out.println("Outdated: " + report.getItem_name() + " Days passed: " + report.getDate_difference());
             }
         }
+        //update status
+        String notification;
+        if (cnt_notifiaction == 0){
+            notification = "보낼 알림 메일이 없습니다.";
+        }
+        else{
+            notification = cnt_notifiaction + " 개의 메일이 " + settingsManager.getSetting().getRecipient_mail() +" 로 발송됐습니다.";
+        }
+        controller.setNotificationText(notification);
 
 //    	currentTime = Calendar.getInstance();
 //    	hour = currentTime.get(Calendar.HOUR);

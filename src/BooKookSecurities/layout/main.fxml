@@ -30,6 +30,11 @@
                         <Label id="label_lastchecked" fx:id="label_lastchecked" text="마지막으로 확인 된보고서: " />
                         <HBox>
                            <children>
+                              <Label fx:id="label_notification" text="Email Notifaction">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Label>
                               <Region HBox.hgrow="ALWAYS" />
                               <Button id="btn_findReports" fx:id="btn_findReports" mnemonicParsing="false" onAction="#OnFindReportClicked" prefHeight="23.0" prefWidth="131.0" text="확인" />
                            </children>

@@ -1,5 +1,6 @@
 package BooKookSecurities;
 
+import BooKookSecurities.Controller.MainController;
 import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Model.ExcelInput;
 import BooKookSecurities.Scheduler.NotifyScheduler;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -22,16 +24,27 @@ public class Main extends Application {
     private static Stage reportScene;
     private static Stage excelinputScene;
     private static ObservableList<ExcelInput> excelInputs;
+    private static Label label_notification = null;
     private SettingsManager settingsManager;
+    private MainController mainController;
     NotifyScheduler notifyScheduler;
+
+    public static void setLabel_notification(javafx.scene.control.Label label_notification) {
+        label_notification = label_notification;
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("layout/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("layout/main.fxml"));
+        Parent root = fxmlLoader.load();
         primaryStage.setTitle("부국증권");
-        mainWindow = new Scene(root);
-        primaryStage.setScene(mainWindow);
 
+        mainController = fxmlLoader.getController();
+        mainWindow = new Scene(root);
+
+        primaryStage.setScene(mainWindow);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {
             //e.consume(); to not close the program
@@ -41,22 +54,27 @@ public class Main extends Application {
             Platform.exit();
         });
 
-
+        setNotifyScheduler();
     }
 
     private void closeProgram() {
         System.out.println("program is closed");
     }
 
+    private void setNotifyScheduler(){
+        notifyScheduler = new NotifyScheduler();
+        notifyScheduler.setScheduler(new NotifyThread(mainController), settingsManager.getSetting().getTime_period_hrs()); //time_period
+    }
     public void init() {
         settingsManager = SettingsManager.getInstance();
-        notifyScheduler = new NotifyScheduler();
-        notifyScheduler.setScheduler(new NotifyThread(), settingsManager.getSetting().getTime_period_hrs()); //time_period
 
         excelInputs = FXCollections.observableArrayList();
 
     }
-
+//
+//    public void setLabeltoNotify(){
+//           notifyScheduler.
+//    }
     public static void main(String[] args) {
         launch(args);
     }
