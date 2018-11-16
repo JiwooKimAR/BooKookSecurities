@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 class DisparateAvgMax{
     double average , max;
@@ -175,10 +176,28 @@ public class ExcelManager {
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet("output");
 
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue(0);
-        //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //reverse sorted list
+        Collections.sort(excelDataArrayList, new Comparator<ExcelData>() {
+            @Override
+            public int compare(ExcelData o1, ExcelData o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
+        int rowNum = 0, idxInput = excelInputs.size() - 1;
+        for (ExcelData excelData : excelDataArrayList){
+            Row row = sheet.createRow(rowNum++);
+            for (int col = 0; col < 3; col++){
+                Cell cell = row.createCell(col);
+                if (col == 0)cell.setCellValue(excelData.getDate().toString());
+                else if (col == 1) cell.setCellValue(excelData.getValue());
+                else if (col == 2){
+                    if (!(excelData.getDate().isAfter(excelInputs.get(idxInput).getStartDate()) || excelData.getDate().isEqual(excelInputs.get(idxInput).getStartDate()))){
+                        if (idxInput > 0) idxInput--;
+                    }
+                    cell.setCellValue(excelInputs.get(idxInput).getTargetValue());
+                }
+            }
+        }
         try {
             FileOutputStream fileOut = new FileOutputStream(fileName);
             wb.write(fileOut);
