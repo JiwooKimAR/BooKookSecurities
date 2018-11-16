@@ -196,7 +196,7 @@ public class MainController implements Initializable {
     }
 
     public void setNotificationText(String text){
-
+        //update UI later
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

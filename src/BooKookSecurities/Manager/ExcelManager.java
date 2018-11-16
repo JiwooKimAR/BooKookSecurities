@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -238,6 +239,8 @@ public class ExcelManager {
             FileOutputStream fileOut = new FileOutputStream(fileName);
             wb.write(fileOut);
             fileOut.close();
+            Desktop.getDesktop().open(new File(fileName));
+
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch (IOException e){
