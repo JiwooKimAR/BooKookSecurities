@@ -3,6 +3,7 @@ package BooKookSecurities.Manager;
 
 import BooKookSecurities.Model.ExcelData;
 import BooKookSecurities.Model.ExcelInput;
+import BooKookSecurities.String.Strings;
 import javafx.collections.ObservableList;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -197,6 +198,41 @@ public class ExcelManager {
                     cell.setCellValue(excelInputs.get(idxInput).getTargetValue());
                 }
             }
+        }
+
+        //write result
+        //assume at least 100 rows are created
+        int startRow, startCol;
+        int base = 5;
+        startRow = startCol = base;
+        Row row = sheet.getRow(startRow);
+        for (String str : Strings.ExcelResultColumns){
+            Cell cell = row.createCell(startCol++);
+            cell.setCellValue(str);
+        }
+        startRow++;
+        startCol = base;
+        int idx = 0;
+        for (DisparateAvgMax value : dispArrayList){
+            row = sheet.getRow(startRow);
+            Cell cell = row.createCell(startCol++);
+            cell.setCellValue(excelInputs.get(idx).getStartDate().toString());
+
+            cell = row.createCell(startCol++);
+            cell.setCellValue("buy");
+
+            cell = row.createCell(startCol++);
+            cell.setCellValue(excelInputs.get(idx).getTargetValue());
+
+            cell = row.createCell(startCol++);
+            cell.setCellValue(value.average);
+
+            cell = row.createCell(startCol++);
+            cell.setCellValue(value.max);
+
+            startCol = base;
+            startRow++;
+            idx++;
         }
         try {
             FileOutputStream fileOut = new FileOutputStream(fileName);

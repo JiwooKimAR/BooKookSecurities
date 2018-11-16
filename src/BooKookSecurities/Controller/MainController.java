@@ -127,14 +127,15 @@ public class MainController implements Initializable {
 
         }
     else{
+            String output_name = "test.xlsx";
             label_progress.setText("계산중...");
             ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText(), Main.getExcelInputs());
             excelManager.read();
             excelManager.calculate();
-            excelManager.write("test.xlsx");
+            excelManager.write(output_name);
             Date date = Calendar.getInstance().getTime();
             long getTime = date.getTime();
-            label_progress.setText(TimeUtil.getCurrentTime() + ": 파일 저장됨.");
+            label_progress.setText(TimeUtil.getCurrentTime() + ": " + output_name + "로파일 저장됨.");
 //        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
 //        sender.SendMail("yo", 10);
         }
