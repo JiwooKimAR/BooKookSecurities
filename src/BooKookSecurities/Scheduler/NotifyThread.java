@@ -5,6 +5,7 @@ import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
 import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
+import BooKookSecurities.Util.EmailSender;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
@@ -58,11 +59,13 @@ public class NotifyThread implements Runnable {
 
         curTime = GregorianCalendar.getInstance();
         int cnt_notifiaction = 0;
+        EmailSender emailSender = new EmailSender(settingsManager.getSetting().getRecipient_mail());
         for (Report report : reports){
             if (isOutdated(report)){ //if outdated
                 //send report
                 cnt_notifiaction++;
                 System.out.println("Outdated: " + report.getItem_name() + " Days passed: " + report.getDate_difference());
+                emailSender.SendMail(report.getItem_name(), report.getDate_difference());
             }
         }
         //update status
@@ -71,9 +74,10 @@ public class NotifyThread implements Runnable {
             notification = "보낼 알림 메일이 없습니다.";
         }
         else{
-            notification = cnt_notifiaction + " 개의 메일이 " + settingsManager.getSetting().getRecipient_mail() +" 로 발송됐습니다.";
+            notification = cnt_notifiaction + " 개의 알림 메일이 " + settingsManager.getSetting().getRecipient_mail() +" 로 발송됐습니다.";
         }
         controller.setNotificationText(notification);
+
 
 //    	currentTime = Calendar.getInstance();
 //    	hour = currentTime.get(Calendar.HOUR);

@@ -42,7 +42,7 @@ public class EmailSender {
             message.setFrom(new InternetAddress(senderEmail));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             message.setSubject("[알림]"+CompanyName+" 분석대상기간 경과 주의");
-            message.setText(CompanyName+"이 최종 공표일로부터" +passedDays+"일 경과하였습니다.");
+            message.setText(CompanyName+"이 최종 공표일로부터 " +passedDays+"일 경과하였습니다.");
             Transport.send(message);
             System.out.println("message sent successfully...");
         } catch(AddressException e) {

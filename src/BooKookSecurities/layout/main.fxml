@@ -30,7 +30,7 @@
                         <Label id="label_lastchecked" fx:id="label_lastchecked" text="마지막으로 확인 된보고서: " />
                         <HBox>
                            <children>
-                              <Label fx:id="label_notification" text="Email Notifaction">
+                              <Label fx:id="label_notification">
                                  <HBox.margin>
                                     <Insets top="5.0" />
                                  </HBox.margin>
