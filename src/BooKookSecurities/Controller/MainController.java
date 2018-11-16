@@ -4,6 +4,7 @@ import BooKookSecurities.Main;
 import BooKookSecurities.Manager.ExcelManager;
 import BooKookSecurities.Manager.ReportManager;
 import BooKookSecurities.Manager.SettingsManager;
+import BooKookSecurities.Model.ExcelData;
 import BooKookSecurities.Model.ExcelInput;
 import BooKookSecurities.Model.Report;
 import BooKookSecurities.Model.Setting;
@@ -125,12 +126,12 @@ public class MainController implements Initializable {
         }
     else{
             label_progress.setText("계산중...");
-            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText());
+            ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText(), Main.getExcelInputs());
             excelManager.read();
+            excelManager.calculate();
             excelManager.write("test.xlsx");
             Date date = Calendar.getInstance().getTime();
             long getTime = date.getTime();
-
             label_progress.setText(TimeUtil.getCurrentTime() + ": 파일 저장됨.");
 //        EmailSender sender = new EmailSender(Strings.EmailSenderMail);
 //        sender.SendMail("yo", 10);
