@@ -175,7 +175,7 @@ public class MainController implements Initializable {
             Collections.sort(excelInputs);
 
             label_inputDscrp.setText("입력된 수: " + size + ", 전체 기간: " + excelInputs.get(0).getStartDate().toString() + " ~ "
-                    + excelInputs.get(size - 1).getEndDate().toString());
+                    + excelInputs.get(size - 1).getStartDate().toString());
         }
     }
     public void OnSetEmailClicked(){

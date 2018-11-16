@@ -4,15 +4,14 @@ package BooKookSecurities.Model;
 import java.time.LocalDate;
 
 public class ExcelInput implements Comparable<ExcelInput>{
-    LocalDate startDate, endDate;
+    LocalDate startDate;
     int targetValue;
 
     public  ExcelInput(){
 
     }
-    public ExcelInput(LocalDate startDate, LocalDate endDate, int targetValue) {
+    public ExcelInput(LocalDate startDate, int targetValue) {
         this.startDate = startDate;
-        this.endDate = endDate;
         this.targetValue = targetValue;
     }
 
@@ -22,14 +21,6 @@ public class ExcelInput implements Comparable<ExcelInput>{
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     public int getTargetValue() {
