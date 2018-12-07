@@ -105,11 +105,12 @@ public class NotifyThread implements Runnable {
         int months_in_between = curTime.get(Calendar.MONTH) - reportDate.get(Calendar.MONTH);
         int days_in_between = curTime.get(Calendar.DAY_OF_MONTH) - reportDate.get(Calendar.DAY_OF_MONTH);
 //        System.out.println("Years: " + years_in_between + " Months: " + months_in_between + " Days: " + days_in_between);
-
-        if (years_in_between >= limit_year && months_in_between >= limit_month && days_in_between >= limit_day){
-            return true;
-        }
-        return false;
+        if (years_in_between >= 2) return true;
+        return  false;
+//        if (years_in_between >= limit_year && months_in_between >= limit_month && days_in_between >= limit_day){
+//            return true;
+//        }
+//        return false;
     }
     private void task() {
 //        ReportManager.readReport();

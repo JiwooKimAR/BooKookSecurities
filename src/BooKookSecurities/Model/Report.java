@@ -10,11 +10,13 @@ import java.util.concurrent.TimeUnit;
 public class Report implements Comparable<Report>{
     public static final int NUM_FIELDS = 3;
     private int item_code;
-    private String item_name;
+    private String item_name, writer;
     private Date item_added_date;
     private int date_difference;
 
 
+    public Report() {
+    }
 
     public Report(int item_code, String item_name, Date item_added_date) {
         this.item_code = item_code;
@@ -23,11 +25,23 @@ public class Report implements Comparable<Report>{
         date_difference = getDifference();
     }
 
+    public void updateDayDifference(){
+        date_difference = getDifference();
+    }
     private int getDifference(){
         Date curDate = Calendar.getInstance().getTime();
         long diff = curDate.getTime() - item_added_date.getTime();
         return (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
     @Override
     public int compareTo(Report o) {
         return getItem_added_date().compareTo(o.getItem_added_date());
