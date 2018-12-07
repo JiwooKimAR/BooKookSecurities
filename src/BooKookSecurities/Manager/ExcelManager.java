@@ -227,10 +227,10 @@ public class ExcelManager {
             cell.setCellValue(excelInputs.get(idx).getTargetValue());
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(Math.round(value.average*10)/10);
+            cell.setCellValue(Math.round(value.average*10)/10.0);
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(Math.rount(value.max*10)/10);
+            cell.setCellValue(Math.round(value.max*10)/10.0);
 
             startCol = base;
             startRow++;
