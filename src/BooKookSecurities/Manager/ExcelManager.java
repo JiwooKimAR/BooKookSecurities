@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
+import static java.lang.Double.parseDouble;
+
 class DisparateAvgMax{
     double average , max;
 }
@@ -227,10 +229,10 @@ public class ExcelManager {
             cell.setCellValue(excelInputs.get(idx).getTargetValue());
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(parseDouble(String.format("%.1f", value.average)));
+            cell.setCellValue(parseDouble(String.format("%.2f", value.average)));
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(parseDouble(String.format("%.1f", value.max)));
+            cell.setCellValue(parseDouble(String.format("%.2f", value.max)));
 
             startCol = base;
             startRow++;
