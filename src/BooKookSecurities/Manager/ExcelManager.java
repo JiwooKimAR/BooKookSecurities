@@ -227,10 +227,10 @@ public class ExcelManager {
             cell.setCellValue(excelInputs.get(idx).getTargetValue());
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(String.format("%.1f", value.average));
+            cell.setCellValue(parseDouble(String.format("%.1f", value.average)));
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(String.format("%.1f", value.max));
+            cell.setCellValue(parseDouble(String.format("%.1f", value.max)));
 
             startCol = base;
             startRow++;
