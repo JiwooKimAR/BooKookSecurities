@@ -1,6 +1,5 @@
 package BooKookSecurities.Manager;
 
-
 import BooKookSecurities.Model.ExcelData;
 import BooKookSecurities.Model.ExcelInput;
 import BooKookSecurities.String.Strings;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+
 class DisparateAvgMax{
     double average , max;
 }
@@ -156,6 +156,7 @@ public class ExcelManager {
             for (ExcelData excelData : excelDataArrayList){
                 if ((excelData.getDate().isEqual(excelInputs.get(i).getStartDate()) || excelData.getDate().isAfter(excelInputs.get(i).getStartDate()))
                 && excelData.getDate().isBefore(excelInputs.get(idx).getStartDate())){
+                	
                     if (excelData.getValue() > max) max = excelData.getValue();
                     total += (long)excelData.getValue();
                     cnt++;
@@ -226,10 +227,10 @@ public class ExcelManager {
             cell.setCellValue(excelInputs.get(idx).getTargetValue());
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(value.average);
+            cell.setCellValue(Math.round(value.average*10)/10);
 
             cell = row.createCell(startCol++);
-            cell.setCellValue(value.max);
+            cell.setCellValue(Math.rount(value.max*10)/10);
 
             startCol = base;
             startRow++;
