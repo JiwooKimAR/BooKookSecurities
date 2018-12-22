@@ -26,6 +26,7 @@
             <HBox spacing="10.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btn_check" mnemonicParsing="false" onAction="#OnCheckClicked" prefWidth="200.0" text="경과 종목 확인" />
                   <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#OnCancelClicked" prefWidth="100.0" text="닫기" />
                   <Button mnemonicParsing="false" onAction="#OnDeleteClicked" prefWidth="100.0" text="삭제" />
                </children>
