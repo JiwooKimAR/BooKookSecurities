@@ -77,13 +77,13 @@ public class MainController implements Initializable {
         for (Report report : target_reports) {
             int month = 0, day = 0, total = 0;
             total = 180 - report.getDate_difference();
-            while (total > 31) {
-                month++;
-                total /= 30;
-            }
-            day = total;
-            list += "'" + report.getItem_name() + "' 종목이 현재 일자에서부터 " + report.getDate_difference() + "일 경과하였고,\n 6개월(180일)로부터 " +
+            month = total / 30;
+            day = total - month * 30;
+            list += "'" + report.getItem_name() + "' 종목이 현재 일자에서부터 " + report.getDate_difference() + "일 경과하였고,\n 6개월(180일)로부터 약 " +
                     month + "개월 " + day + "일 남았습니다.\n";
+        }
+        if (target_reports.isEmpty()) {
+            list += "써야하는 보고서가 존재하지 않습니다.";
         }
         scrollpane_alert.setContent(new Text(list));
     }
@@ -153,7 +153,7 @@ public class MainController implements Initializable {
             alert.showAndWait();
 
         }
-    else{
+        else{
             String output_name = "test.xlsx";
             label_progress.setText("계산중...");
             ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText(), Main.getExcelInputs());
