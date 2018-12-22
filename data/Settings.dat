@@ -1,5 +1,5 @@
 recipient email=kuk941025@gmail.com
-report path=.//data//report.txt
+report path=.//data//temp_report.xlsx
 limit year=1
 limit month=0
 limit day=0
