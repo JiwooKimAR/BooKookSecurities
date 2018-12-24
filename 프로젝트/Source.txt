@@ -1,0 +1,89 @@
+Public Sub btn_calc_Click()
+    Call main_disparateRatio
+End Sub
+Function calculateAvgMax(sDate As Date, eDate As Date) As Integer()
+    Dim a(2) As Integer, idx As Integer, sIdx As Integer, eIDx As Integer
+    'a(0) = avg, a(1) = max
+    Dim total As Long, max As Long
+    max = total = 0
+    
+        
+    'Find pos
+    Dim dateIdx As Integer
+    dateIdx = 1
+    Do While IsDate(Worksheets(1).Range("a" & dateIdx).Value) = False
+        dateIdx = dateIdx + 1
+    Loop
+    
+    Dim dtCur As Date
+    dtCur = Worksheets(1).Range("a" & dateIdx).Value
+    Do While dtCur >= eDate
+        dtCur = DateValue(Worksheets(1).Range("a" & dateIdx).Value)
+        dateIdx = dateIdx + 1
+    Loop
+    eIDx = dateIdx - 1
+    Do While dtCur > sDate
+        dtCur = DateValue(Worksheets(1).Range("a" & dateIdx).Value)
+        dateIdx = dateIdx + 1
+    Loop
+    sIdx = dateIdx - 1
+    
+    
+    'eIdx = index where the end date is located
+    'eIdx ~ sIdx = dates between start date and end date
+    For idx = eIDx To sIdx
+        Dim curValue As Integer
+            curValue = Worksheets(1).Range("b" & idx).Value
+        total = total + curValue
+        
+        If curValue > max Then
+            max = curValue
+        End If
+    Next idx
+    
+    
+    a(0) = total / (sIdx - eIDx + 1)
+    a(1) = max
+    calculateAvgMax = a
+End Function
+
+Public Sub main_disparateRatio()
+    Dim inIdx As Integer
+    
+
+    inIdx = 1
+    'Locate start postition of file
+
+    'Locate start position of input date (startig date)
+    Do While IsDate(Worksheets(2).Range("b" & inIdx).Value) = False
+        inIdx = inIdx + 1
+    Loop
+    
+
+    Dim sDate As Date, eDate As Date
+    Dim tarVal As Integer
+    Dim rtr() As Integer
+    Dim pctAvg As Double, pctMax As Double
+    
+    'Loop until bottom blank is empty
+    Do While IsEmpty(Worksheets(2).Range("b" & inIdx + 1).Value) = False
+        sDate = Worksheets(2).Range("b" & inIdx)
+        eDate = Worksheets(2).Range("b" & inIdx + 1)
+        tarVal = Worksheets(2).Range("d" & inIdx)
+        
+        rtr = calculateAvgMax(sDate, eDate)
+        pctAvg = (rtr(0) - tarVal) / tarVal
+        pctMax = (rtr(1) - tarVal) / tarVal
+        
+        Worksheets(2).Range("e" & inIdx) = pctAvg
+        Worksheets(2).Range("f" & inIdx) = pctMax
+        
+        
+        inIdx = inIdx + 1
+    Loop
+    
+    
+End Sub
+
+
+
