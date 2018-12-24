@@ -3,5 +3,6 @@ report path=.//data//temp_report.xlsx
 limit year=1
 limit month=0
 limit day=0
+limit date=90
 start=No
 time period=6

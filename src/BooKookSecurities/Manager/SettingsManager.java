@@ -80,6 +80,9 @@ public class SettingsManager {
             case "limit day":
                 this.setting.setLimit_day(Integer.parseInt(token[1]));
                 break;
+            case "limit date":
+                this.setting.setLimit_date(Integer.parseInt(token[1]));
+                break;
             case "start":
                 if (token[1].equals("No")) this.setting.setStartProgram(false);
                 else this.setting.setStartProgram(true);

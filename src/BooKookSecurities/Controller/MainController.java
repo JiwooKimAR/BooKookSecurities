@@ -22,6 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,6 +41,8 @@ import java.util.*;
 public class MainController implements Initializable {
     @FXML
     private Label label_filelocation, label_lastchecked, label_inputDscrp, label_progress; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
+    @FXML
+    private ScrollPane scrollpane_alert;
     @FXML
     private TextField txt_excelLocation, txt_email, txt_reportFile;
     @FXML
@@ -58,6 +62,30 @@ public class MainController implements Initializable {
 
 
         init();
+
+        settingsManager = SettingsManager.getInstance();
+        Setting setting = settingsManager.getSetting();
+        int Limit = setting.getLimit_date();
+        ArrayList<Report> reportsF = reportManager.getReports();
+        ArrayList<Report> target_reports = new ArrayList<>();
+        for (Report report : reportsF) {
+            if (report.getDate_difference() > Limit && report.getDate_difference() < 180) {
+                target_reports.add(report);
+            }
+        }
+        String list = "";
+        for (Report report : target_reports) {
+            int month = 0, day = 0, total = 0;
+            total = 180 - report.getDate_difference();
+            month = total / 30;
+            day = total - month * 30;
+            list += "'" + report.getItem_name() + "' 종목이 현재 일자에서부터 " + report.getDate_difference() + "일 경과하였고,\n 6개월(180일)로부터 약 " +
+                    month + "개월 " + day + "일 남았습니다.\n";
+        }
+        if (target_reports.isEmpty()) {
+            list += "써야하는 보고서가 존재하지 않습니다.";
+        }
+        scrollpane_alert.setContent(new Text(list));
     }
     private void init(){
         loadSettings();
@@ -108,7 +136,6 @@ public class MainController implements Initializable {
 
 
         stage.show();
-
     }
 
     public void OnToggleSelected(){
@@ -126,7 +153,7 @@ public class MainController implements Initializable {
             alert.showAndWait();
 
         }
-    else{
+        else{
             String output_name = "test.xlsx";
             label_progress.setText("계산중...");
             ExcelManager excelManager = new ExcelManager(txt_excelLocation.getText(), Main.getExcelInputs());

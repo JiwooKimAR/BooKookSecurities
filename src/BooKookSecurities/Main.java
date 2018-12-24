@@ -15,10 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Main extends Application {
     private static Scene mainWindow;
     private static Stage reportScene;
@@ -36,7 +32,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main2.xfml.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("layout/main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("부국증권");
@@ -46,6 +42,7 @@ public class Main extends Application {
 
         primaryStage.setScene(mainWindow);
         primaryStage.show();
+
         primaryStage.setOnCloseRequest(e -> {
             //e.consume(); to not close the program
 
@@ -75,9 +72,7 @@ public class Main extends Application {
 //    public void setLabeltoNotify(){
 //           notifyScheduler.
 //    }
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
 
     public static Scene currentWIndow() {
         return mainWindow;

@@ -3,7 +3,7 @@ package BooKookSecurities.Model;
 public class Setting {
     private String recipient_mail, report_path;
     private boolean isStartProgram;
-    private int limit_year, limit_month, limit_day, time_period_hrs;
+    private int limit_year, limit_month, limit_day, time_period_hrs, limit_date;
 
     public Setting() {
     }
@@ -63,4 +63,8 @@ public class Setting {
     public void setLimit_day(int limit_day) {
         this.limit_day = limit_day;
     }
+
+    public int getLimit_date() { return this.limit_date; }
+
+    public void setLimit_date(int limit_date) { this.limit_date = limit_date; }
 }
