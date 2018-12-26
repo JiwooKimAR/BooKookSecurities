@@ -1,4 +1,4 @@
-username=김경덕
+username=null
 report path=.//data//temp_report.xlsx
 limit year=1
 limit month=0

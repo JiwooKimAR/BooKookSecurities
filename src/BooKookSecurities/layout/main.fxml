@@ -146,12 +146,12 @@
                                           <Insets top="5.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox id="combo_alarmtype" fx:id="combo_alarmtype" prefHeight="23.0" prefWidth="170.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="txtAlarmHour" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <Label text="알림 주기">
+                                    <Label fx:id="labelAlarmPeriod" text="알림 주기">
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin>

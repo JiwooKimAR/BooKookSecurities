@@ -40,15 +40,15 @@ import java.util.*;
 
 public class MainController implements Initializable {
     @FXML
-    private Label label_filelocation, label_lastchecked, label_inputDscrp, label_progress; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
+    private Label label_filelocation, label_lastchecked, label_inputDscrp, label_progress, labelAlarmPeriod; //실행탭 파일위치, 실행탭 마지막으로 확인된 보고서
     @FXML
     private ScrollPane scrollpane_alert;
     @FXML
-    private TextField txt_excelLocation, txt_name, txt_reportFile;
+    private TextField txt_excelLocation, txt_name, txt_reportFile, txtAlarmHour;
     @FXML
     private ToggleButton toggle_startprogram;
     @FXML
-    private ComboBox<String> combo_alarmtype, combo_year, combo_month, combo_day;
+    private ComboBox<String> combo_year, combo_month, combo_day;
     public Label label_notification;
     private SettingsManager settingsManager;
     private ReportManager reportManager;
@@ -104,6 +104,10 @@ public class MainController implements Initializable {
 
         label_progress.setText("");
         Main.setLabel_notification(label_notification);
+        combo_year.setVisible(false);
+        combo_month.setVisible(false);
+        combo_day.setVisible(false);
+        labelAlarmPeriod.setVisible(false);
     }
 
     private void loadReports(){
@@ -127,6 +131,7 @@ public class MainController implements Initializable {
         combo_month.getSelectionModel().select(setting.getLimit_month());
         combo_day.getSelectionModel().select(setting.getLimit_day());
         label_filelocation.setText("파일 위치: " + setting.getReport_path());
+        txtAlarmHour.setText(String.valueOf(setting.getTime_period_hrs()));
     }
 
     public void OnFindReportClicked() throws Exception{
@@ -217,6 +222,8 @@ public class MainController implements Initializable {
             stage.setTitle("사용자 이름 등록");
             stage.setScene(new Scene(root));
             stage.showAndWait();
+
+            settingsManager.saveSetting();
         }
     }
 
@@ -243,7 +250,17 @@ public class MainController implements Initializable {
     }
 
     public void OnUpdateClicked(){
-        System.out.println("update clicked");
+        settingsManager.updateSetting("username", txt_name.getText());
+        settingsManager.updateSetting("report path", txt_reportFile.getText());
+        settingsManager.updateSetting("time period", txtAlarmHour.getText());
+        try {
+            settingsManager.saveSetting();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("변경 완료");
+        alert.showAndWait();
     }
 
     public void setNotificationText(String text){

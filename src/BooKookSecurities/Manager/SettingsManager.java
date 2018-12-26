@@ -4,7 +4,9 @@ import BooKookSecurities.Model.Setting;
 import BooKookSecurities.String.Strings;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -39,7 +41,7 @@ public class SettingsManager {
         return this.setting;
     }
 
-    private void updateSetting(String key, String value){
+    public void updateSetting(String key, String value){
         String[] updates = new String[2];
         updates[0] = key;
         updates[1] = value;
@@ -62,7 +64,19 @@ public class SettingsManager {
             e.printStackTrace();
         }
     }
-
+    public void saveSetting() throws IOException{
+        FileWriter fileWriter = new FileWriter(settingPath);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.printf("username=%s" + System.lineSeparator(), setting.getUsername());
+        printWriter.printf("report path=%s" + System.lineSeparator(), setting.getReport_path());
+        printWriter.printf("limit year=%d" + System.lineSeparator(), setting.getLimit_year());
+        printWriter.printf("limit month=%d" + System.lineSeparator(), setting.getLimit_month());
+        printWriter.printf("limit date=%d" + System.lineSeparator(), setting.getLimit_date());
+        if (setting.isStartProgram()) printWriter.printf("start=Yes" + System.lineSeparator());
+        else printWriter.printf("start=No" + System.lineSeparator());
+        printWriter.printf("time period=%d" + System.lineSeparator(), setting.getTime_period_hrs());
+        printWriter.close();
+    }
     private void readToken(String[] token){
         switch (token[0]){
             case "username":
