@@ -32,7 +32,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main2.xfml.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("layout/main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("부국증권");
@@ -41,6 +41,7 @@ public class Main extends Application {
         mainWindow = new Scene(root);
 
         primaryStage.setScene(mainWindow);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(e -> {

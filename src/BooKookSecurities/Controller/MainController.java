@@ -64,6 +64,11 @@ public class MainController implements Initializable {
         init();
 
         settingsManager = SettingsManager.getInstance();
+
+        setNotificationLabel();
+
+    }
+    private void setNotificationLabel(){
         Setting setting = settingsManager.getSetting();
         int Limit = setting.getLimit_date();
         ArrayList<Report> reportsF = reportManager.getReports();

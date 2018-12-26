@@ -47,6 +47,9 @@ public class ReportController implements Initializable {
         this.reportArrayList = reports;
         fillTable();
     }
+    public void OnCheckClicked(){
+        System.out.println("CheckClicked");
+    }
 
     private void fillTable(){
         TableColumn<Report, Integer> numCol = new TableColumn<>("Number");
