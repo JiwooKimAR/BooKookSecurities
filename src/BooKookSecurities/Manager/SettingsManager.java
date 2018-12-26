@@ -65,8 +65,9 @@ public class SettingsManager {
 
     private void readToken(String[] token){
         switch (token[0]){
-            case "recipient email":
-                this.setting.setRecipient_mail(token[1]);
+            case "username":
+                if (token[1].equals(" ")) this.setting.setUsername(null);
+                else this.setting.setUsername(token[1]);
                 break;
             case "report path":
                 this.setting.setReport_path(token[1]);

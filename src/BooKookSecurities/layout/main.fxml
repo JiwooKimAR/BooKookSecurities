@@ -103,7 +103,7 @@
                                           <Insets top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField id="txt_email" fx:id="txt_email" HBox.hgrow="ALWAYS" />
+                                    <TextField id="txt_email" fx:id="txt_name" HBox.hgrow="ALWAYS" />
                                     <Label text="등록된 이름으로 작성된 보고서만 감지합니다.">
                                        <HBox.margin>
                                           <Insets top="5.0" />

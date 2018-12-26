@@ -1,7 +1,7 @@
 package BooKookSecurities.Model;
 
 public class Setting {
-    private String recipient_mail, report_path;
+    private String username, report_path;
     private boolean isStartProgram;
     private int limit_year, limit_month, limit_day, time_period_hrs, limit_date;
 
@@ -16,12 +16,12 @@ public class Setting {
         this.time_period_hrs = time_period_hrs;
     }
 
-    public String getRecipient_mail() {
-        return recipient_mail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRecipient_mail(String recipient_mail) {
-        this.recipient_mail = recipient_mail;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getReport_path() {

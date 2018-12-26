@@ -44,7 +44,7 @@ public class MainController implements Initializable {
     @FXML
     private ScrollPane scrollpane_alert;
     @FXML
-    private TextField txt_excelLocation, txt_email, txt_reportFile;
+    private TextField txt_excelLocation, txt_name, txt_reportFile;
     @FXML
     private ToggleButton toggle_startprogram;
     @FXML
@@ -111,7 +111,7 @@ public class MainController implements Initializable {
         settingsManager = SettingsManager.getInstance();
         Setting setting = settingsManager.getSetting();
 
-        txt_email.setText(setting.getRecipient_mail());
+        txt_name.setText(setting.getUsername());
         txt_reportFile.setText(setting.getReport_path());
         toggle_startprogram.setSelected(setting.isStartProgram());
         if (setting.isStartProgram()) toggle_startprogram.setText("ON");
