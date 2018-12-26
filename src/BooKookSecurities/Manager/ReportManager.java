@@ -66,7 +66,8 @@ public class ReportManager {
     }
 
     public Report getOldestReport() { //return the latest report file
-        if (reports == null || reports.size() == 0) readReports();
+        if (reports == null) readReports();
+        else if (reports.size() == 0) return  null;
         return reports.get(0);
     }
 
@@ -107,7 +108,8 @@ public class ReportManager {
                     }
                 }
                 report.updateDayDifference();
-                reports.add(report);
+                if (report.getWriter().equals(settingsManager.getSetting().getUsername()))
+                    reports.add(report);
             }
         } catch (InvalidFormatException e) {
             e.printStackTrace();
@@ -117,30 +119,7 @@ public class ReportManager {
             return;
         }
 
-        System.out.println("done");
-//        try{
-//            reportLines = Files.readAllLines(rFile.toPath());
-//            for (String line : reportLines){
-//
-//                String[] token = line.split(" ");
-//                int item_num = Integer.parseInt(token[0].replaceFirst("0", ""));
-//                int item_date = Integer.parseInt(token[token.length - 1]);
-//                String name;
-//
-//                if (token.length > Report.NUM_FIELDS) name = token[1] + " " + token[2];
-//                else name = token[1];
-//                name = name.substring(1, name.length() - 1); //remove quotes
-//
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-//                Date date = dateFormat.parse(Integer.toString(item_date));
-//
-//                reports.add(new Report(item_num, name, date));
-//            }
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }catch (ParseException e){
-//            e.printStackTrace();
-//        }
+
 
     }
 

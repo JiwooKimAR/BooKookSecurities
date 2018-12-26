@@ -24,9 +24,9 @@
             </HBox>
             <HBox>
                <children>
-                  <TextField prefHeight="23.0" prefWidth="157.0" />
+                  <TextField fx:id="txtUsername" prefHeight="23.0" prefWidth="157.0" />
                   <Region HBox.hgrow="SOMETIMES" />
-                  <Button mnemonicParsing="false" text="등록" />
+                  <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#OnRegisterClicked" text="등록" />
                </children>
             </HBox>
          </children>

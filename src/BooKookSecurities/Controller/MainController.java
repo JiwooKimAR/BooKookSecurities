@@ -61,13 +61,18 @@ public class MainController implements Initializable {
         for (int i = 1; i <= 30; i++) combo_day.getItems().add(Integer.toString(i));
 
 
-        init();
-
         settingsManager = SettingsManager.getInstance();
 
-        setNotificationLabel();
+        try {
+            checkValidUserName();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        init();
 
+        setNotificationLabel();
     }
+
     private void setNotificationLabel(){
         Setting setting = settingsManager.getSetting();
         int Limit = setting.getLimit_date();
@@ -105,7 +110,8 @@ public class MainController implements Initializable {
         reportManager = new ReportManager();
         reports = reportManager.getReports();
         Report oldest = reportManager.getOldestReport();
-        label_lastchecked.setText(" 마지막으로 확인 된 보고서: " + oldest.getItem_name() + ", " + oldest.getDate_difference() + "일 지남.");
+        if (oldest != null)
+            label_lastchecked.setText("마지막으로 확인 된 보고서: " + oldest.getItem_name() + ", " + oldest.getDate_difference() + "일 지남.");
     }
     private void loadSettings(){
         settingsManager = SettingsManager.getInstance();
@@ -120,7 +126,7 @@ public class MainController implements Initializable {
         combo_year.getSelectionModel().select(setting.getLimit_year());
         combo_month.getSelectionModel().select(setting.getLimit_month());
         combo_day.getSelectionModel().select(setting.getLimit_day());
-        label_filelocation.setText(" 파일 위치: " + setting.getReport_path());
+        label_filelocation.setText("파일 위치: " + setting.getReport_path());
     }
 
     public void OnFindReportClicked() throws Exception{
@@ -200,6 +206,19 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    private void checkValidUserName() throws Exception{
+        if (settingsManager.getSetting().getUsername() == null){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/name_input.fxml"));
+            Parent root = fxmlLoader.load();
+            //InputNameController inputNameController = fxmlLoader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("사용자 이름 등록");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        }
+    }
 
     private void updateInputDscrp(){
         ObservableList<ExcelInput> excelInputs = Main.getExcelInputs();
